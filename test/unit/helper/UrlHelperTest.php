@@ -42,7 +42,7 @@ class sfContext
   }
 }
 
-$t = new lime_test(18, new lime_output_color());
+$t = new lime_test(23, new lime_output_color());
 
 $context = sfContext::getInstance();
 $context->controller = new myController();
