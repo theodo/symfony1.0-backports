@@ -405,11 +405,11 @@ class sfPropelDatabaseSchema
     $booleans = array('required', 'primaryKey', 'autoincrement', 'autoIncrement', 'noXsd', 'isI18N', 'isCulture');
     if (in_array($key, $booleans))
     {
-      return ($value == 1) ? 'true' : 'false';
+      return $value == 1 ? 'true' : 'false';
     }
     else
     {
-      return $value;
+      return is_null($value) ? 'null' : $value;
     }
   }
 
