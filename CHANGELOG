@@ -3,6 +3,7 @@ Version 1.0.0-rc2
 
 No major changes since 1.0.0-rc1.
 
+* r3385: new propel-dump-data task
 * r3377: fixed PEAR installation problem with PEAR 1.5
 
 * new book is now bundled with symfony under the doc/ directory
