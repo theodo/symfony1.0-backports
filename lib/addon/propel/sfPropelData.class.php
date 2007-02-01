@@ -9,6 +9,8 @@
  */
 
 /**
+ * This class is the Propel implementation of sfData.  It interacts with the data source
+ * and loads data.
  *
  * @package    symfony
  * @subpackage addon
@@ -21,6 +23,14 @@ class sfPropelData extends sfData
     $maps = array();
 
   // symfony load-data (file|dir)
+  /**
+   * Loads data from a file or directory into a Propel data source
+   *
+   * @param mixed A file or directory path
+   * @param string The Propel connection name, default 'propel'
+   *
+   * @throws Exception If the database throws an error, rollback transaction and rethrows exception
+   */
   public function loadData($directory_or_file = null, $connectionName = 'propel')
   {
     $fixture_files = $this->getFiles($directory_or_file);
@@ -44,6 +54,15 @@ class sfPropelData extends sfData
     }
   }
 
+  /**
+   * Implements the abstract loadDataFromArray method and loads the data using the generated data model.
+   *
+   * @param array The data to be loaded into the data source
+   *
+   * @throws Exception If data is unnamed.
+   * @throws sfException If an object defined in the model does not exist in the data
+   * @throws sfException If a column that does not exist is referenced
+   */
   public function loadDataFromArray($data)
   {
     if ($data === null)
@@ -132,6 +151,15 @@ class sfPropelData extends sfData
     }
   }
 
+  /**
+   * Clears existing data from the data source by reading the fixture files
+   * and deleting the existing data for only those classes that are mentioned
+   * in the fixtures.
+   *
+   * @param array The list of YAML files.
+   *
+   * @throws sfException If a class mentioned in a fixture can not be found
+   */
   protected function doDeleteCurrentData($fixture_files)
   {
     // delete all current datas in database
@@ -169,6 +197,13 @@ class sfPropelData extends sfData
     }
   }
 
+  /**
+   * Loads the mappings for the classes
+   *
+   * @param string The name of a data object
+   *
+   * @throws sfException If the class cannot be found
+   */
   protected function loadMapBuilder($class)
   {
     $class_map_builder = $class.'MapBuilder';
