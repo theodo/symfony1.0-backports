@@ -262,37 +262,66 @@ class sfPropelData extends sfData
     // load map classes
     array_walk($tables, array($this, 'loadMapBuilder'));
 
-    foreach ($tables as $table)
+    // reordering tables to take foreign keys into account
+    $move = true;
+    while ($move)
     {
-      $tableMap = $this->maps[$table]->getDatabaseMap()->getTable(constant($table.'Peer::TABLE_NAME'));
+      foreach ($tables as $i => $tableName)
+      {
+        $tableMap = $this->maps[$tableName]->getDatabaseMap()->getTable(constant($tableName.'Peer::TABLE_NAME'));
+
+        foreach ($tableMap->getColumns() as $column)
+        {
+          if ($column->isForeignKey())
+          {
+            $relatedTable = $this->maps[$tableName]->getDatabaseMap()->getTable($column->getRelatedTableName());
+            if (array_search($relatedTable->getPhpName(), $tables) > $i)
+            {
+              unset($tables[$i]);
+              $tables[] = $tableName;
+              $move = true;
+              continue 2;
+            }
+          }
+        }
+
+        $move = false;
+      }
+    }
+
+    foreach ($tables as $tableName)
+    {
+      $tableMap = $this->maps[$tableName]->getDatabaseMap()->getTable(constant($tableName.'Peer::TABLE_NAME'));
 
       // get db info
-      $rs = $con->executeQuery('SELECT * FROM '.constant($table.'Peer::TABLE_NAME'));
+      $rs = $con->executeQuery('SELECT * FROM '.constant($tableName.'Peer::TABLE_NAME'));
 
-      $dumpData[$table] = array();
+      $dumpData[$tableName] = array();
 
-      while ($rs->next()) {
-        $pk = '';
+      while ($rs->next())
+      {
+        $pk = $tableName;
+        $values = array();
         foreach ($tableMap->getColumns() as $column)
         {
           $col = strtolower($column->getColumnName());
-
           if ($column->isPrimaryKey())
           {
-            $pk .= '_' .$rs->get($col);
-            continue;
+            $pk .= '_'.$rs->get($col);
           }
           else if ($column->isForeignKey())
           {
-            $relatedTable = $this->maps[$table]->getDatabaseMap()->getTable($column->getRelatedTableName());
+            $relatedTable = $this->maps[$tableName]->getDatabaseMap()->getTable($column->getRelatedTableName());
 
-            $dumpData[$table][$table.$pk][$col] = $relatedTable->getPhpName().'_'.$rs->get($col);
+            $values[$col] = $relatedTable->getPhpName().'_'.$rs->get($col);
           }
           else
           {
-            $dumpData[$table][$table.$pk][$col] = $rs->get($col);
+            $values[$col] = $rs->get($col);
           }
         }
+
+        $dumpData[$tableName][$pk] = $values;
       }
     }
 
