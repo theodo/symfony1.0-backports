@@ -76,7 +76,7 @@ require_once \''.$this->getFilePath($this->getStubObjectBuilder()->getPackage().
   {
     $script .= "
 
-  public function __call(\$method, \$parameters)
+  public function __call(\$method, \$arguments)
   {
     if (!\$callable = sfMixer::getCallable('{$this->getClassname()}:'.\$method))
     {
