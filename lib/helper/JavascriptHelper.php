@@ -990,6 +990,12 @@
     return (is_string($method) && $method[0] != "'") ? "'$method'" : $method;
   }
 
+  if options[:with] && !options[:with].include?("=")
+    options[:with] = "'#{options[:with]}=' + value"
+  else
+    options[:with] ||= 'value' if options[:update]
+  end
+
   function _build_observer($klass, $name, $options = array())
   {
     if (!isset($options['with']) && $options['update'])
@@ -1000,7 +1006,7 @@
     $callback = remote_function($options);
 
     $javascript  = 'new '.$klass.'("'.$name.'", ';
-    if (isset($options['frequency']))
+    if (isset($options['frequency']) && $options['frequency'] > 0)
     {
       $javascript .= $options['frequency'].", ";
     }
