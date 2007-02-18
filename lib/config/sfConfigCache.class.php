@@ -63,6 +63,8 @@ class sfConfigCache
     // handler to call for this configuration file
     $handlerToCall = null;
 
+    $handler = str_replace(DIRECTORY_SEPARATOR, '/', $handler);
+
     // grab the base name of the handler
     $basename = basename($handler);
     if (isset($this->handlers[$handler]))
