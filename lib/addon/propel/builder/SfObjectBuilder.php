@@ -90,15 +90,6 @@ require_once \''.$this->getFilePath($this->getStubObjectBuilder()->getPackage().
 
 ";
   }
-  
-  protected function addConstants(&$script)
-  {
-    parent::addConstants($script);
-    $script .= "
-	/** the default database name for this class */
-	const DATABASE_NAME = '{$this->getDatabase()->getName()}';
-";
-  }
 
   protected function addAttributes(&$script)
   {
