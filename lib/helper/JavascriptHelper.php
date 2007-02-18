@@ -990,12 +990,6 @@
     return (is_string($method) && $method[0] != "'") ? "'$method'" : $method;
   }
 
-  if options[:with] && !options[:with].include?("=")
-    options[:with] = "'#{options[:with]}=' + value"
-  else
-    options[:with] ||= 'value' if options[:update]
-  end
-
   function _build_observer($klass, $name, $options = array())
   {
     if (!isset($options['with']) && $options['update'])
