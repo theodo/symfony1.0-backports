@@ -93,7 +93,7 @@ class sfContext
   }
 }
 
-$t = new lime_test(83, new lime_output_color());
+$t = new lime_test(85, new lime_output_color());
 
 $context = sfContext::getInstance();
 $context->controller = new myController();
@@ -188,6 +188,8 @@ $t->is(input_password_tag('name', null, array('class' => 'foo')), '<input type="
 $t->diag('textarea_tag()');
 $t->is(textarea_tag('name'), '<textarea name="name" id="name"></textarea>', 'textarea_tag() takes a name as its first argument');
 $t->is(textarea_tag('name', 'content'), '<textarea name="name" id="name">content</textarea>', 'textarea_tag() takes a value as its second argument');
+$t->is(textarea_tag('name', '<p>foo</p>'), '<textarea name="name" id="name">&lt;p&gt;foo&lt;/p&gt;</textarea>', 'textarea_tag() escapes the content');
+$t->is(textarea_tag('name', '&lt;p&gt;foo&lt;/p&gt;'), '<textarea name="name" id="name">&lt;p&gt;foo&lt;/p&gt;</textarea>', 'textarea_tag() does not escape an already escaped content');
 
 // options
 $t->is(textarea_tag('name', null, array('class' => 'foo')), '<textarea name="name" id="name" class="foo"></textarea>', 'textarea_tag() takes an array of attribute options as its third argument');
