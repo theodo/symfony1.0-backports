@@ -198,7 +198,8 @@ $t->is(textarea_tag('name', null, array('size' => '5x20')), '<textarea name="nam
 
 require_once(sfConfig::get('sf_symfony_lib_dir').'/helper/sfRichTextEditor.class.php');
 require_once(sfConfig::get('sf_symfony_lib_dir').'/helper/sfRichTextEditorTinyMCE.class.php');
-sfConfig::set('sf_rich_text_js_dir', dirname(__FILE__).'/fixtures');
+sfConfig::set('sf_web_dir', dirname(__FILE__));
+sfConfig::set('sf_rich_text_js_dir', 'fixtures');
 $t->like(textarea_tag('name', 'content', array('rich' => 'TinyMCE')), '/tinyMCE\.init/', 'textarea_tag() can create a rich textarea tag based on tinyMCE');
 $t->like(textarea_tag('name', 'content', array('rich' => true)), '/tinyMCE\.init/', 'textarea_tag() can create a rich textarea tag based on tinyMCE');
 
