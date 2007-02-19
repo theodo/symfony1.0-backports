@@ -1,3 +1,13 @@
+Version 1.0.0
+-------------
+
+No major changes since 1.0.0-rc2.
+
+* r3502: fixed sfFilter::isFirstCall() method
+* r3493: removed the DATABASE_NAME constants
+
+* fixed typos in the book
+
 Version 1.0.0-rc2
 -----------------
 
