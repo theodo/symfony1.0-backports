@@ -1,3 +1,16 @@
+Version 1.0.1
+-------------
+
+This is a bug fix release.
+
+Fixed bugs:
+
+* r3624: fixed security.yml case sensitivity
+* r3599: fixed sfYaml::load() not returning correct values
+* r3598: removed unneeded usage of JavaScript helpers in the web debug toolbar
+* r3597: fixed sfConsoleRequest::initialize() signature
+* r3541: fixed typo in the cache classes when logging
+
 Version 1.0.0
 -------------
 
