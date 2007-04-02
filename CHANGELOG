@@ -1,11 +1,24 @@
+Version 1.0.2
+-------------
+
+This is a bug fix release.
+
+Minor bug fixed:
+
+* r3699: fixed highlight_text() doesn't work with /
+* r3692: fixed i18n support for errors in sfRequest
+
 Version 1.0.1
 -------------
 
 This is a bug fix release.
 
-Fixed bugs:
+Major bugs fixed:
 
 * r3624: fixed security.yml case sensitivity
+
+Minor bug fixed:
+
 * r3599: fixed sfYaml::load() not returning correct values
 * r3598: removed unneeded usage of JavaScript helpers in the web debug toolbar
 * r3597: fixed sfConsoleRequest::initialize() signature
