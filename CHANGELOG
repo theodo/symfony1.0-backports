@@ -5,7 +5,7 @@ This is a bug fix release.
 
 Minor bug fixed:
 
-* r3785: fixed getCookies() call in sfDebug when using sfConsoleResponse
+* r3785: fixed getCookies() call in sfDebug when using sfConsoleResponse (#1666)
 * r3775: fixed _compute_public_path() when using a query string
 * r3754: updated Propel to 1.2.1 (http://propel.phpdb.org/trac/query?status=closed&milestone=1.2.1&resolution=fixed&order=priority)
 * r3746: fixed output escaping and _get_object_list() (#1593)
