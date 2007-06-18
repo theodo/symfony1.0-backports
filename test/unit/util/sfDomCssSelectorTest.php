@@ -10,7 +10,7 @@
 
 require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
-$t = new lime_test(35, new lime_output_color());
+$t = new lime_test(40, new lime_output_color());
 
 $html = <<<EOF
 <html>
@@ -56,6 +56,12 @@ $html = <<<EOF
           <li>test 4</li>
         </ul>
       </ul>
+    </div>
+
+    <div id="adjacent_bug">
+      <p>First paragraph</p>
+      <p>Second paragraph</p>
+      <p>Third <a href='#'>paragraph</a></p>
     </div>
 
     <div id="footer">footer</div>
@@ -110,8 +116,8 @@ $t->diag('combinators');
 $t->is($c->getTexts('body  h1'), array('Test page'), '->getTexts() takes a CSS selectors separated by one or more spaces');
 $t->is($c->getTexts('div#combinators > ul  >   li'), array('test 1', 'test 2'), '->getTexts() support > combinator');
 $t->is($c->getTexts('div#combinators>ul>li'), array('test 1', 'test 2'), '->getTexts() support > combinator with optional surrounding spaces');
-$t->is($c->getTexts('div#combinators ul  +   li'), array('test 1', 'test 3'), '->getTexts() support + combinator');
-$t->is($c->getTexts('div#combinators ul+li'), array('test 1', 'test 3'), '->getTexts() support + combinator with optional surrounding spaces');
+$t->is($c->getTexts('div#combinators li  +   li'), array('test 2', 'test 4'), '->getTexts() support + combinator');
+$t->is($c->getTexts('div#combinators li+li'), array('test 2', 'test 4'), '->getTexts() support + combinator with optional surrounding spaces');
 
 $t->is($c->getTexts('h1, h2'), array('Test page', 'Title 1', 'Title 2'), '->getTexts() takes a multiple CSS selectors separated by a ,');
 $t->is($c->getTexts('h1,h2'), array('Test page', 'Title 1', 'Title 2'), '->getTexts() takes a multiple CSS selectors separated by a ,');
@@ -119,4 +125,10 @@ $t->is($c->getTexts('h1  ,   h2'), array('Test page', 'Title 1', 'Title 2'), '->
 $t->is($c->getTexts('h1, h1,h1'), array('Test page'), '->getTexts() returns nodes only once for multiple selectors');
 $t->is($c->getTexts('h1,h2,h1'), array('Test page', 'Title 1', 'Title 2'), '->getTexts() returns nodes only once for multiple selectors');
 
-$t->is($c->getTexts('p[onclick*="a . and a #"], div#combinators > ul + li'), array('works great', 'test 1'), '->getTexts() mega example!');
+$t->is($c->getTexts('p[onclick*="a . and a #"], div#combinators > ul li + li'), array('works great', 'test 2', 'test 4'), '->getTexts() mega example!');
+
+$t->is($c->getTexts('#adjacent_bug > p'), array('First paragraph', 'Second paragraph', 'Third paragraph'), '->getTexts() suppports the + combinator');
+$t->is($c->getTexts('#adjacent_bug > p > a'), array('paragraph'), '->getTexts() suppports the + combinator');
+$t->is($c->getTexts('#adjacent_bug p + p'), array('Second paragraph', 'Third paragraph'), '->getTexts() suppports the + combinator');
+$t->is($c->getTexts('#adjacent_bug > p + p'), array('Second paragraph', 'Third paragraph'), '->getTexts() suppports the + combinator');
+$t->is($c->getTexts('#adjacent_bug > p + p > a'), array('paragraph'), '->getTexts() suppports the + combinator');

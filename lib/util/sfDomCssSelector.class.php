@@ -193,12 +193,14 @@ class sfDomCssSelector
       switch ($combinator)
       {
         case ' ':
+          // Descendant selector
           foreach ($node->getElementsByTagName($tagName) as $element)
           {
             $founds[] = $element;
           }
           break;
         case '>':
+          // Child selector
           foreach ($node->childNodes as $element)
           {
             if ($tagName == $element->nodeName)
@@ -208,7 +210,13 @@ class sfDomCssSelector
           }
           break;
         case '+':
-          $element = $node->childNodes->item(0);
+          // Adjacent selector
+          $element = $node->nextSibling;
+          if ($element && '#text' == $element->nodeName)
+          {
+            $element = $element->nextSibling;
+          }
+
           if ($element && $tagName == $element->nodeName)
           {
             $founds[] = $element;
