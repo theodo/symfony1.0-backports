@@ -11,7 +11,7 @@ This is a bug fix release.
 * r4250: fixed include_blank being forced to 'true' in admin generator (#1739)
 * r4242: fixed a typo in MySQL i18n message source
 * r4240: added an exception when a YAML file contains tabs instead of spaces when tabs are mixed with spaces
-* r4238: replaced all accourences of deprecated function mysql_escape_string() by mysql_real_escape_string() (#1860)
+* r4238: replaced all occurences of deprecated function mysql_escape_string() by mysql_real_escape_string() (#1860)
 * r4236: fixed bug for adjacent CSS selector
 * r4228: fixed a bug in URL generation for route names having a star in the middle
 * r4205: fixed _edit_form.php in Admin Generator should have have an action of save, not edit (#1812)
