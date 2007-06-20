@@ -3,7 +3,23 @@ Version 1.0.4
 
 This is a bug fix release.
 
-* updated lime to 1.0.1 (fixes php 5.2.2 support)
+* r4282: fixed sfValidatorManager refuses zero values as null values (#1649)
+* r4277: fixed generator themes in the project data directory do not override data in plugin directory (#1813)
+* r4266: fixed $request->hasError() should return true on errors with empty message (#1864)
+* r4264: fixed usage of components in admin generator generator.yml (#1809)
+* r4262: added some unit tests for symfony escaping mecanism
+* r4250: fixed include_blank being forced to 'true' in admin generator (#1739)
+* r4242: fixed a typo in MySQL i18n message source
+* r4240: added an exception when a YAML file contains tabs instead of spaces when tabs are mixed with spaces
+* r4238: replaced all accourences of deprecated function mysql_escape_string() by mysql_real_escape_string() (#1860)
+* r4236: fixed bug for adjacent CSS selector
+* r4228: fixed a bug in URL generation for route names having a star in the middle
+* r4205: fixed _edit_form.php in Admin Generator should have have an action of save, not edit (#1812)
+* r4203: fixed sf_check_lock and sf_check_symfony has no effect (#1675)
+* r4199, r4201: fixed input_date_tag with same name but different ids (#1568)
+* r4195: fixed link_to_if() inserts parameter in html (#1700)
+
+* updated lime to 1.0.4 (fixes php 5.2.2 support)
 
 Version 1.0.3
 -------------
