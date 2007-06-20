@@ -3,6 +3,7 @@ Version 1.0.4
 
 This is a bug fix release.
 
+* r4286: fixed sfBrowser keeps previous Dom is response is not XHTML (#1853)
 * r4282: fixed sfValidatorManager refuses zero values as null values (#1649)
 * r4277: fixed generator themes in the project data directory do not override data in plugin directory (#1813)
 * r4266: fixed $request->hasError() should return true on errors with empty message (#1864)
