@@ -304,13 +304,23 @@ class sfMessageSource_XLIFF extends sfMessageSource
     }
 
     // create a new dom, import the existing xml
-    $dom = DOMDocument::load($filename);
+    $dom = new DOMDocument();
+    $dom->load($filename);
 
     // find the body element
     $xpath = new DomXPath($dom);
     $body = $xpath->query('//body')->item(0);
 
-    $count = $xpath->query('//trans-unit')->length;
+    // find the biggest "id" used
+    $lastNodes = $xpath->query('//trans-unit[not(@id <= preceding-sibling::trans-unit/@id) and not(@id <= following-sibling::trans-unit/@id)]');
+    if (null !== $last = $lastNodes->item(0))
+    {
+      $count = intval($last->getAttribute('id'));
+    }
+    else
+    {
+      $count = 0;
+    }
 
     // for each message add it to the XML file using DOM
     foreach ($messages as $message)
@@ -372,7 +382,8 @@ class sfMessageSource_XLIFF extends sfMessageSource
     }
 
     // create a new dom, import the existing xml
-    $dom = DOMDocument::load($filename);
+    $dom = new DOMDocument();
+    $dom->load($filename);
 
     // find the body element
     $xpath = new DomXPath($dom);
@@ -474,7 +485,8 @@ class sfMessageSource_XLIFF extends sfMessageSource
     }
 
     // create a new dom, import the existing xml
-    $dom = DOMDocument::load($filename);
+    $dom = new DOMDocument();
+    $dom->load($filename);
 
     // find the body element
     $xpath = new DomXPath($dom);
