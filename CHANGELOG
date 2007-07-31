@@ -3,6 +3,15 @@ Version 1.0.6
 
 This is a bug fix release.
 
+* r4752: fixed sfZendPlugin is broken (#1941)
+* r4729: removed E_STRICT when using the plugin tasks
+* r4642: fixed sfWebRequest isSecure() bug for certain server configurations (#1931)
+* r4641: fixed sfWebDebug top css class name (#1982)
+* r4621: fixed untranslated message in _list_messages.php partial (#1969)
+* r4574: fixed typo in sfTestBrowser::getAndCheck()
+* r4559: fixed status code 404 may be transformed into 304 when using ETag (#1944)
+* r4404: fixed sfTestBrowser::isResponseHeader() method (#1900)
+
 Version 1.0.5
 -------------
 
