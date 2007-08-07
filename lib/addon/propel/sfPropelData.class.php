@@ -296,8 +296,6 @@ class sfPropelData extends sfData
       // get db info
       $rs = $con->executeQuery('SELECT * FROM '.constant($tableName.'Peer::TABLE_NAME'));
 
-      $dumpData[$tableName] = array();
-
       while ($rs->next())
       {
         $pk = $tableName;
@@ -319,6 +317,11 @@ class sfPropelData extends sfData
           {
             $values[$col] = $rs->get($col);
           }
+        }
+
+        if (!isset($dumpData[$tableName]))
+        {
+          $dumpData[$tableName] = array();
         }
 
         $dumpData[$tableName][$pk] = $values;
