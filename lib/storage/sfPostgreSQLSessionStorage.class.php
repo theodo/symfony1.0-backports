@@ -138,7 +138,7 @@ class sfPostgreSQLSessionStorage extends sfSessionStorage
     $db_time_col = $this->getParameterHolder()->get('db_time_col', 'sess_time');
 
     // delete the record associated with this id
-    $sql = 'DELETE FROM '.$db_table.' WHERE '.$db_time_col.' < '.$lifetime;
+    $sql = 'DELETE FROM '.$db_table.' WHERE '.$db_time_col.' < '.$time;
 
     if (@pg_query($this->resource, $sql))
     {
