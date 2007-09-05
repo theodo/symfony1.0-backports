@@ -3,6 +3,18 @@ Version 1.0.7
 
 This is a bug fix release.
 
+* r4980: updated pake to 1.1.5 (#2125)
+* r4956: fixed magic_quotes checks from the symfony command line closes (#2155)
+* r4941: fixed sfPropelData doesn't use connection passed on data load (#2149)
+* r4904: fixed dumping Propel data to multiple files
+* r4891: fixed a typo in sfPostgreSQLSessionStorage::sessionGC()
+* r4883: fixed fillInFormFilter can't find form with content_type = xml (#1687)
+* r4834: fixed sfPropelData::dump() filenames when dumping to a directory
+* r4831: fixed propel-dump-data does not preserve data loading order (#1575)
+* r4829: fixed typo in sfPropelData
+* r4827: fixed propel-dump-data & sfGuard (#2019)
+* r4824: fixed propel-dump-data outputs model name when table is empty (#1577)
+
 Version 1.0.6
 -------------
 
