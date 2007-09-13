@@ -12,7 +12,7 @@ require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
 class sfContext
 {
-  public static
+  public
     $instance = null,
     $storage  = null,
     $user     = null,
