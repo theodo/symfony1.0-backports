@@ -233,7 +233,6 @@ class sfBasicSecurityUser extends sfUser implements sfSecurityUser
         $this->getContext()->getLogger()->info('{sfUser} automatic user logout');
       }
       $this->setTimedOut();
-      $this->clearCredentials();
       $this->setAuthenticated(false);
     }
 
