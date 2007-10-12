@@ -3,6 +3,20 @@ Version 1.0.8
 
 This is a bug fix release.
 
+* r5471: fixed admin main.css - absolute to relative paths (#1889)
+* r5355: plugin-install tasks create relative symlink instead of absolute symlink
+* r5348: fixed EzComponents library inclusion (#2193)
+* r5344: allow using a custom form id (#1899)
+* r5339: fixed sfPropelData error message (#2218)
+* r5308: fixed sfFileCache::clean() when dir does not exist (#2294)
+* r5160: fixed double call to clearCredentials() in sfBasicSecurityUser
+* r5153: fixed code completion not working with sfTestBrowser
+* r5149: fixed bug in _get_options_from_objects (#1526)
+* r5145: fixed ETag to be compliant with the HTTP1.1 spec (#2216)
+* r5141: fixed consistent syntax of i18n helper function when i18n is off
+* r5061: fixed blank screen of death (#2231 and #1862)
+* r5001: fixed sfBasicSecurityFilter should not secure the "secure" action either
+
 Version 1.0.7
 -------------
 
