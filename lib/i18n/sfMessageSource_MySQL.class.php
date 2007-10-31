@@ -154,7 +154,7 @@ class sfMessageSource_MySQL extends sfMessageSource
       $dbhost = $dsninfo['hostspec'] ? $dsninfo['hostspec'] : 'localhost';
       if (!empty($dsninfo['port']))
       {
-        $dbhost = ':' . $dsninfo['socket'];
+        $dbhost .= ':'.$dsninfo['port'];
       }
     }
     $user = $dsninfo['username'];
