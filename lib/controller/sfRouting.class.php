@@ -449,7 +449,7 @@ class sfRouting
       if (!$found)
       {
         $error = 'Unable to find a matching routing rule to generate url for params "%s".';
-        $error = sprintf($error, var_export($params));
+        $error = sprintf($error, var_export($params, true));
 
         throw new sfConfigurationException($error);
       }
