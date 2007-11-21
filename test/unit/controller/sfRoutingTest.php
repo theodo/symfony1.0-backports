@@ -10,7 +10,7 @@
 
 require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
-$t = new lime_test(66, new lime_output_color());
+$t = new lime_test(68, new lime_output_color());
 
 // public methods
 $r = sfRouting::getInstance();
@@ -175,6 +175,14 @@ $params = array('module' => 'default', 'action' => 'index', 'test' => 'foo', 'id
 $url = '/default/index';
 $t->is($r->parse($url), $params, '->parse() removes last parameters if they have default values');
 //$t->is($r->generate('', $params), $url, '->generate() removes last parameters if they have default values');
+
+// Numerics params
+$r->clearRoutes();
+$r->connect('test', '/:module/:action/*', array('module' => 'default', 'action' => 'index'));
+$params = array('module' => 'default', 'action' => 'index', 15 => 'foo', 32 => 'bar', 'foo' => 'bar');
+$url = '/default/index/15/foo/32/bar/foo/bar';
+$t->is($r->parse($url), $params, '->parse() routes can have numeric parameters');
+$t->is($r->generate('', $params), $url, '->generate() routes can have numeric parameters');
 
 // star parameter
 $r->clearRoutes();
