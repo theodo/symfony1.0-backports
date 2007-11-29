@@ -3,7 +3,24 @@ Version 1.0.9
 
 This is a bug fix release.
 
+* r6203: fixed typo in the submit_tag() of the UrlHelper?.php (#2493)
+* r6129: sfBrowser : ->click() also search for HTML button elements (#2342)
+* r6125: sfRouting : allow numeric parameters (#2317)
+* r6019: fixed sfPropelData::dumpData()
+* r6014: fixed radio button ids
+* r6013: fixed templates of login & secure actions of default module are exchanged
+* r6003,r6004,r6007,r6010: merged bug fixes from creole 1.1 + propel 1.2.1 + fixed date
+* r5997: fixed admin generator filters HTML defect (#1891)
+* r5856: fixed through_class in admin_*_list tags (#1612)
+* r5851: fixed sfZendFrameworkBridge autoload (#2314)
+* r5847: fixed typo in JavascriptHelper?.php (#2464)
+* r5845: fixed incomplete error message in sfRouting.class.php (#2465)
+* r5776: fixed typo (#2480)
+* r5772: backported i18n fixes from Prado + improved DateTimeFormatInfo
+* r5771: fixed typo in sfMessageSource_MySQL.class.php (#2477)
+* r5749: reverted YAML schema confusion
 * r5704: only logged in users are now timed out due to sf_timeout
+* r5701: fixed propel-build-all-load task execution
 
 Version 1.0.8
 -------------
