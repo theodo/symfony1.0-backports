@@ -228,6 +228,7 @@ function select_country_tag($name, $selected = null, $options = array())
   asort($countries);
 
   $option_tags = options_for_select($countries, $selected, $options);
+  unset($options['include_blank'], $options['include_custom']);
 
   return select_tag($name, $option_tags, $options);
 }
@@ -275,6 +276,7 @@ function select_language_tag($name, $selected = null, $options = array())
   asort($languages);
 
   $option_tags = options_for_select($languages, $selected, $options);
+  unset($options['include_blank'], $options['include_custom']);
 
   return select_tag($name, $option_tags, $options);
 }
