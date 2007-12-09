@@ -39,12 +39,16 @@ class sfFileLogger
       mkdir($dir, 0777, 1);
     }
 
-    if (!is_writable($dir) || (file_exists($options['file']) && !is_writable($options['file'])))
+    if (!is_writable($dir) || ($fileExists = file_exists($options['file']) && !is_writable($options['file'])))
     {
       throw new sfFileException(sprintf('Unable to open the log file "%s" for writing', $options['file']));
     }
 
     $this->fp = fopen($options['file'], 'a');
+    if (!$fileExists)
+    {
+      chmod($options['file'], 0666);
+    }
   }
 
   /**
