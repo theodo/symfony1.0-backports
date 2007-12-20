@@ -433,8 +433,7 @@ class sfWebResponse extends sfResponse
     {
       $value = $this->getContentType();
     }
-
-    if (!$replace)
+    else if (!$replace)
     {
       $current = $this->getParameter($key, '', 'helper/asset/auto/httpmeta');
       $value = ($current ? $current.', ' : '').$value;
