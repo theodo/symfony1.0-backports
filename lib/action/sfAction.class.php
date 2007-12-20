@@ -35,7 +35,10 @@ abstract class sfAction extends sfComponent
     parent::initialize($context);
 
     // include security configuration
-    require(sfConfigCache::getInstance()->checkConfig(sfConfig::get('sf_app_module_dir_name').'/'.$this->getModuleName().'/'.sfConfig::get('sf_app_module_config_dir_name').'/security.yml', true));
+    if ($file = sfConfigCache::getInstance()->checkConfig(sfConfig::get('sf_app_module_dir_name').'/'.$this->getModuleName().'/'.sfConfig::get('sf_app_module_config_dir_name').'/security.yml', true))
+    {
+      require $file;
+    }
 
     return true;
   }
