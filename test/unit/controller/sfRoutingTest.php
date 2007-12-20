@@ -206,6 +206,9 @@ $url = '/default';
 $t->is($r->parse($url), $params, '->parse() takes the first matching route but takes * into accounts');
 $t->is($r->generate('', $params), $url, '->generate() takes the first matching route but takes * into accounts');
 
+$t->is($r->parse('/default/index/foo/bar\'123'), array('module' => 'default', 'action' => 'index', 'foo' => 'bar\'123'), '->parse() handles quotes');
+
+
 // * in the middle
 $r->clearRoutes();
 $r->connect('test', '/:module/:action/*/test', array('module' => 'default', 'action' => 'index'));
