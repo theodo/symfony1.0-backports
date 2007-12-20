@@ -1,7 +1,24 @@
-Version 1.0.10PRE
+Version 1.0.11PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.10
+-------------
+
+This is a bug fix release.
+
+* r6622: Problem with ProjectExport and directory structure change (#2606)
+* r6614: fixed magic_quotes_gpc() handling in sfRouting (#1801)
+* r6610: fixed non-sf exception handling (#2064)
+* r6607: fixed incorrect use of sfConfigCache:checkConfig(..., true) (#2123)
+* r6469: fixed sfOutputEscaperObjectDecorator::toString() as PHP 5.2.5 does not allow exception in toString() methods (#2630) 
+* r6398: fixed default log file permissions (#2145)
+* r6378: fixed typo in sfDebugConnection (#2524)
+* r6375: changed implementation of sfCultureInfo::simplify (#1821)
+* r6371: fixed connecting to a database using unix socket (#2539)
+* r6358: fixed sfProcessCache eaccelerator delete also cached scripts
+* r6337: reverted changes for default time and date format
 
 Version 1.0.9
 -------------
