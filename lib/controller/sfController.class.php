@@ -553,13 +553,13 @@ abstract class sfController
 
       if ($actionEntry->getModuleName() == sfConfig::get('sf_login_module') && $actionEntry->getActionName() == sfConfig::get('sf_login_action'))
       {
-        $error = 'Your mail action is secured but the user is not authenticated.';
+        $error = 'Your action is secured but the user is not authenticated.';
 
         throw new sfException($error);
       }
       else if ($actionEntry->getModuleName() == sfConfig::get('sf_secure_module') && $actionEntry->getActionName() == sfConfig::get('sf_secure_action'))
       {
-        $error = 'Your mail action is secured but the user does not have access.';
+        $error = 'Your action is secured but the user does not have access.';
 
         throw new sfException($error);
       }
