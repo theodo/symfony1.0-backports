@@ -263,6 +263,8 @@ class sfWebRequest extends sfRequest
    */
   public function getFileExtension($name)
   {
+    static $mimeTypes = null;
+
     $fileType = $this->getFileType($name);
 
     if (!$fileType)
@@ -270,7 +272,10 @@ class sfWebRequest extends sfRequest
       return '.bin';
     }
 
-    $mimeTypes = unserialize(file_get_contents(sfConfig::get('sf_symfony_data_dir').'/data/mime_types.dat'));
+    if (is_null($mimeTypes))
+    {
+      $mimeTypes = unserialize(file_get_contents(sfConfig::get('sf_symfony_data_dir').'/data/mime_types.dat'));
+    }
 
     return isset($mimeTypes[$fileType]) ? '.'.$mimeTypes[$fileType] : '.bin';
   }
