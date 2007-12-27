@@ -504,7 +504,7 @@ class sfWebResponse extends sfResponse
   /**
    * Retrieves stylesheets for the current web response.
    *
-   * @param string Direcotry delimiter
+   * @param string Position
    *
    * @return string Stylesheets
    */
@@ -517,7 +517,7 @@ class sfWebResponse extends sfResponse
    * Adds an stylesheet to the current web response.
    *
    * @param string Stylesheet
-   * @param string Direcotry delimiter
+   * @param string Position
    * @param string Stylesheet options
    */
   public function addStylesheet($css, $position = '', $options = array())
