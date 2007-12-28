@@ -234,8 +234,8 @@ class sfWebResponse extends sfResponse
    */
   public function setContentType($value)
   {
-    // add charset if needed
-    if (false === stripos($value, 'charset') && 0 === stripos($value, 'text/'))
+    // add charset if needed on text/*, *xml
+    if (false === stripos($value, 'charset') && (0 === stripos($value, 'text/') || strlen($value) - 3 === strripos($value, 'xml')))
     {
       $value .= '; charset='.sfConfig::get('sf_charset');
     }
