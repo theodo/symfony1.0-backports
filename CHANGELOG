@@ -1,7 +1,19 @@
-Version 1.0.11PRE
+Version 1.0.12PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.11
+
+* r6765, r6766: fixed error message in getPresentationFor() (closes #1527)
+* r6764: fixed logic error in sfPager class affects haveToPaginate() method (closes #1512)
+* r6768, r6769: added mime types caching in sfWebRequest (closes #1811, #1846)
+* r6761, r6762: fixed content type charset on non text/* content-type (closes #1811, #1968) 
+* r6743: doc: fixed typos (closes #2580, #2596, #2518)
+* r6740, r6741: fixed sequences bug for postgresql (closes #2584)
+* r6987, r6988: fixed caching-Bug of file sfWebresponse.class.php (#2764)
+* r6649: fixed value for 'Content-Type' HTTP meta header is repeated (closes #1756, #2557, #2402, #2398)
+* r6648: fixed call to undefined method sfResponse::sendHttpHeaders (closes #2412)
 
 Version 1.0.10
 -------------
