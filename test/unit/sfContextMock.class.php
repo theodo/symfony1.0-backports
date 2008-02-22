@@ -60,4 +60,17 @@ class sfContext
 
     return $storage;
   }
+
+  public function getUser()
+  {
+    static $user;
+
+    if (!$user)
+    {
+      $user = new sfUser;
+      $user->initialize($this);
+    }
+
+    return $user;
+  }
 }
