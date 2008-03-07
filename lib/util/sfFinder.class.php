@@ -239,7 +239,7 @@ class sfFinder
    */
   public function ignore_version_control()
   {
-    $ignores = array('.svn', '_svn', 'CVS', '_darcs', '.arch-params', '.monotone', '.bzr', '.git', '.hg')
+    $ignores = array('.svn', '_svn', 'CVS', '_darcs', '.arch-params', '.monotone', '.bzr', '.git', '.hg');
 
     return $this->discard($ignores)->prune($ignores);
   }
