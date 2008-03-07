@@ -51,7 +51,9 @@ class sfWebDebugLogger
 
     // if we have xdebug, add some stack information
     $debug_stack = array();
-    if (function_exists('xdebug_get_function_stack'))
+
+    // disable xdebug when an HTTP debug session exists (crashes Apache, see #2438)
+    if (function_exists('xdebug_get_function_stack') && !isset($_GET['XDEBUG_SESSION_START']) && !isset($_COOKIE['XDEBUG_SESSION']))
     {
       foreach (xdebug_get_function_stack() as $i => $stack)
       {
