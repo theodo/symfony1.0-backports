@@ -42,7 +42,7 @@ class sfContext
   }
 }
 
-$t = new lime_test(24, new lime_output_color());
+$t = new lime_test(25, new lime_output_color());
 
 $context = sfContext::getInstance();
 $context->controller = new myController();
@@ -89,12 +89,14 @@ $t->diag('link_to_if()');
 $t->is(link_to_if(true, 'test', ''), '<a href="module/action">test</a>', 'link_to_if() returns an HTML "a" tag if the condition is true');
 $t->is(link_to_if(false, 'test', ''), '<span>test</span>', 'link_to_if() returns an HTML "span" tag by default if the condition is false');
 $t->is(link_to_if(false, 'test', '', array('tag' => 'div')), '<div>test</div>', 'link_to_if() takes a "tag" option');
+$t->is(link_to_if(true, 'test', '', array('tag' => 'div')), '<a href="module/action">test</a>', 'link_to_if() removes "tag" option in true case');
 $t->is(link_to_if(false, 'test', '', array('query_string' => 'foo=bar', 'absolute' => true, 'absolute_url' => 'http://www.google.com/')), '<span>test</span>', 'link_to_if() returns an HTML "span" tag by default if the condition is false');
 
 // link_to_unless()
 $t->diag('link_to_unless()');
 $t->is(link_to_unless(false, 'test', ''), '<a href="module/action">test</a>', 'link_to_unless() returns an HTML "a" tag if the condition is false');
 $t->is(link_to_unless(true, 'test', ''), '<span>test</span>', 'link_to_unless() returns an HTML "span" tag by default if the condition is true');
+
 
 // mail_to()
 $t->diag('mail_to()');
