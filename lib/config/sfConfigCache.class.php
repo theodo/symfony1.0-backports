@@ -336,7 +336,14 @@ class sfConfigCache
   protected function writeCacheFile($config, $cache, &$data)
   {
     $fileCache = new sfFileCache(dirname($cache));
+    $fileCache->setWriteControl(true);
     $fileCache->setSuffix('');
-    $fileCache->set(basename($cache), '', $data);
+
+    if (!$fileCache->set(basename($cache), '', $data))
+    {
+      $fileCache->remove(basename($cache), '');
+
+      throw new sfConfigurationException(sprintf('Unable to write config cache for "%s".', $config));
+    }
   }
 }
