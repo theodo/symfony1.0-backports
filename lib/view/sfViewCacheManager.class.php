@@ -156,9 +156,12 @@ class sfViewCacheManager
   public function addCache($moduleName, $actionName, $options = array())
   {
     // normalize vary headers
-    foreach ($options['vary'] as $key => $name)
+    if (isset($options['vary']))
     {
-      $options['vary'][$key] = strtr(strtolower($name), '_', '-');
+      foreach ($options['vary'] as $key => $name)
+      {
+        $options['vary'][$key] = strtr(strtolower($name), '_', '-');
+      }
     }
 
     $options['lifeTime'] = isset($options['lifeTime']) ? $options['lifeTime'] : 0;
