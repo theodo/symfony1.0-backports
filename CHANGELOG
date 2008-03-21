@@ -1,9 +1,34 @@
-Version 1.0.12PRE
+Version 1.0.13PRE
 -------------
 
 This is a bug fix release.
 
+Version 1.0.12
+-------------
+
+This is a bug fix release.
+
+* r8019: sfWebRequest handles multi-dimensional file input fields (backported from 1.1) (closes #2009)
+* r8010: 1.0: merged fix for potential php notice (closes #3168)
+* r8006: fixed plugin-install command on windows (closes #2590)
+* r7999: button_to produces invalid XHTML (closes #3113)
+* r7997: admin generator handles plain fields (closes #2935)
+* r7977: fixed view cache doesn't accept zero client lifetime (closes #3141)
+* r7850: fixed default error_reporting values (PHP 5.2 has a new constant) (closes #3098)
+* r7831: fixed inclusion of generator.yml for every module (closes #1949)
+* r7802: fixed "Cannot unset string offsets" error
+* r7769: Etag was not checking correctly the enclosing quotes. (closes #3065)
+* r7762: fixed web debug toolbar segfaults PHP when debugging using xdebug
+* r7665: correction in DateFormHelper? (fixes #3023)
+* r7620: added instructions to allow periods in routes (closes #2295)
+* r7589: fixed sfNumberValidator to reject hexadecimal values (closes #2741)
+* r7547: fixed uri encoding / xhtml error (closes #2968)
+* r7541: fixed hebrew calender language file for 1.0 (closes #2970)
+
 Version 1.0.11
+-------------
+
+This is a bug fix release.
 
 * r6765, r6766: fixed error message in getPresentationFor() (closes #1527)
 * r6764: fixed logic error in sfPager class affects haveToPaginate() method (closes #1512)
