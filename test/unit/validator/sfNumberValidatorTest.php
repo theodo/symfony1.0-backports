@@ -12,7 +12,7 @@ require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 require_once($_test_dir.'/unit/sfContextMock.class.php');
 require_once($_test_dir.'/unit/sfValidatorTestHelper.class.php');
 
-$t = new lime_test(51, new lime_output_color());
+$t = new lime_test(53, new lime_output_color());
 
 $context = new sfContext();
 $v = new sfNumberValidator();
@@ -84,6 +84,10 @@ $h->launchTests($v, 4, false, 'type', 'type_error', array('type' => 'decimal'));
 $t->diag('->execute() - type is any');
 $h->launchTests($v, 4.1, true, 'type', null, array('type' => 'any'));
 $h->launchTests($v, 4, true, 'type', 'type_error', array('type' => 'any'));
+
+// number is negative
+$t->diag('->execute() - number is negative');
+$h->launchTests($v, -4, true, 'type', 'type_error', array('type' => 'any'));
 
 // conversion of value
 $t->diag('->execute() - conversion of value');
