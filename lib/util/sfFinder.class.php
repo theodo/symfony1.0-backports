@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -309,7 +309,7 @@ class sfFinder
     $files    = array();
     $here_dir = getcwd();
     $numargs  = func_num_args();
-    $arg_list = func_get_args();
+    $arg_list = func_get_args(); 
 
     // first argument is an array?
     if ($numargs == 1 && is_array($arg_list[0]))
@@ -337,11 +337,9 @@ class sfFinder
         continue;
       }
 
-      $dir = str_replace(array('/', '\\'), '/', $dir);
-
       if ($this->relative)
       {
-        $files = array_merge($files, str_replace($dir.DIRECTORY_SEPARATOR, '', str_replace(array('/', '\\'), '/', $this->search_in($dir))));
+        $files = array_merge($files, str_replace($dir.DIRECTORY_SEPARATOR, '', $this->search_in($dir)));
       }
       else
       {
