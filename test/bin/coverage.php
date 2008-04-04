@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -26,6 +26,6 @@ $c->extension = '.class.php';
 $c->verbose = false;
 $c->base_dir = realpath(dirname(__FILE__).'/../../lib');
 
-$finder = pakeFinder::type('file')->name('*.php')->prune('vendor');
+$finder = pakeFinder::type('file')->ignore_version_control()->name('*.php')->prune('vendor');
 $c->register($finder->in($c->base_dir));
 $c->run();

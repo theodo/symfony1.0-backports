@@ -108,7 +108,7 @@ abstract class sfData
     }
     else if (is_dir($directory_or_file))
     {
-      $fixture_files = sfFinder::type('file')->name('*.yml')->in($directory_or_file);
+      $fixture_files = sfFinder::type('file')->ignore_version_control()->name('*.yml')->in($directory_or_file);
     }
     else
     {
