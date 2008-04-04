@@ -3,11 +3,18 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+/**
+ *
+ * @package    symfony
+ * @subpackage util
+ * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
+ * @version    SVN: $Id$
+ */
 
 /**
  *
@@ -30,18 +37,16 @@
  */
 class sfFinder
 {
-  protected $type                   = 'file';
-  protected $names                  = array();
-  protected $prunes                 = array();
-  protected $discards               = array();
-  protected $execs                  = array();
-  protected $mindepth               = 0;
-  protected $sizes                  = array();
-  protected $maxdepth               = 1000000;
-  protected $relative               = false;
-  protected $follow_link            = false;
-  protected $sort                   = false;
-  protected $ignore_version_control = true;
+  protected $type        = 'file';
+  protected $names       = array();
+  protected $prunes      = array();
+  protected $discards    = array();
+  protected $execs       = array();
+  protected $mindepth    = 0;
+  protected $sizes       = array();
+  protected $maxdepth    = 1000000;
+  protected $relative    = false;
+  protected $follow_link = false;
 
   /**
    * Sets maximum directory depth.
@@ -87,25 +92,21 @@ class sfFinder
   public static function type($name)
   {
     $finder = new sfFinder();
-    return $finder->setType($name);
-  }
 
-  public function setType($name)
-  {
     if (strtolower(substr($name, 0, 3)) == 'dir')
     {
-      $this->type = 'directory';
+      $finder->type = 'directory';
     }
     else if (strtolower($name) == 'any')
     {
-      $this->type = 'any';
+      $finder->type = 'any';
     }
     else
     {
-      $this->type = 'file';
+      $finder->type = 'file';
     }
 
-    return $this;
+    return $finder;
   }
 
   /*
@@ -234,37 +235,13 @@ class sfFinder
    *
    * Currently supports Subversion, CVS, DARCS, Gnu Arch, Monotone, Bazaar-NG, GIT, Mercurial
    *
-   * @return object current sfFinder object
+   * @return object current pakeFinder object
    */
-  public function ignore_version_control($ignore = true)
+  public function ignore_version_control()
   {
-    $this->ignore_version_control = $ignore;
+    $ignores = array('.svn', '_svn', 'CVS', '_darcs', '.arch-params', '.monotone', '.bzr', '.git', '.hg');
 
-    return $this;
-  }
-
-  /**
-   * Returns files and directories ordered by name
-   *
-   * @return object current sfFinder object
-   */
-  public function sort_by_name()
-  {
-    $this->sort = 'name';
-
-    return $this;
-  }
-
-  /**
-   * Returns files and directories ordered by type (directories before files), then by name
-   *
-   * @return object current sfFinder object
-   */
-  public function sort_by_type()
-  {
-    $this->sort = 'type';
-
-    return $this;
+    return $this->discard($ignores)->prune($ignores);
   }
 
   /**
@@ -285,11 +262,11 @@ class sfFinder
     {
       if (is_array($args[$i]) && !method_exists($args[$i][0], $args[$i][1]))
       {
-        throw new sfException(sprintf('method "%s" does not exist for object "%s".', $args[$i][1], $args[$i][0]));
+        throw new sfException("method {$args[$i][1]} does not exist for object {$args[$i][0]}");
       }
       else if (!is_array($args[$i]) && !function_exists($args[$i]))
       {
-        throw new sfException(sprintf('function "%s" does not exist.', $args[$i]));
+        throw new sfException("function {$args[$i]} does not exist");
       }
 
       $this->execs[] = $args[$i];
@@ -332,16 +309,7 @@ class sfFinder
     $files    = array();
     $here_dir = getcwd();
     $numargs  = func_num_args();
-    $arg_list = func_get_args();
-
-    $finder = clone $this;
-
-    if ($this->ignore_version_control)
-    {
-      $ignores = array('.svn', '_svn', 'CVS', '_darcs', '.arch-params', '.monotone', '.bzr', '.git', '.hg');
-
-      $finder->discard($ignores)->prune($ignores);
-    }
+    $arg_list = func_get_args(); 
 
     // first argument is an array?
     if ($numargs == 1 && is_array($arg_list[0]))
@@ -369,22 +337,14 @@ class sfFinder
         continue;
       }
 
-      $dir = str_replace(array('/', '\\'), '/', $dir);
-
       if ($this->relative)
       {
-        $dir   = rtrim($dir, '/');
-        $files = array_merge($files, str_replace($dir.'/', '', str_replace(array('/', '\\'), '/', $finder->search_in($dir))));
+        $files = array_merge($files, str_replace($dir.DIRECTORY_SEPARATOR, '', $this->search_in($dir)));
       }
       else
       {
-        $files = array_merge($files, $finder->search_in($dir));
+        $files = array_merge($files, $this->search_in($dir));
       }
-    }
-
-    if ($this->sort == 'name')
-    {
-      sort($files);
     }
 
     return array_unique($files);
@@ -403,8 +363,7 @@ class sfFinder
     }
 
     $files = array();
-    $temp_files = array();
-    $temp_folders = array();
+
     if (is_dir($dir))
     {
       $current_dir = opendir($dir);
@@ -420,44 +379,6 @@ class sfFinder
 
         if (is_dir($current_entry))
         {
-          if ($this->sort == 'type')
-          {
-            $temp_folders[$entryname] = $current_entry;
-          }
-          else
-          {
-            if (($this->type == 'directory' || $this->type == 'any') && ($depth >= $this->mindepth) && !$this->is_discarded($dir, $entryname) && $this->match_names($dir, $entryname) && $this->exec_ok($dir, $entryname))
-            {
-              $files[] = realpath($current_entry);
-            }
-
-            if (!$this->is_pruned($dir, $entryname))
-            {
-              $files = array_merge($files, $this->search_in($current_entry, $depth + 1));
-            }
-          }
-        }
-        else
-        {
-          if (($this->type != 'directory' || $this->type == 'any') && ($depth >= $this->mindepth) && !$this->is_discarded($dir, $entryname) && $this->match_names($dir, $entryname) && $this->size_ok($dir, $entryname) && $this->exec_ok($dir, $entryname))
-          {
-            if ($this->sort == 'type')
-            {
-              $temp_files[] = realpath($current_entry);
-            }
-            else
-            {
-              $files[] = realpath($current_entry);
-            }
-          }
-        }
-      }
-
-      if ($this->sort == 'type')
-      {
-        ksort($temp_folders);
-        foreach($temp_folders as $entryname => $current_entry)
-        {
           if (($this->type == 'directory' || $this->type == 'any') && ($depth >= $this->mindepth) && !$this->is_discarded($dir, $entryname) && $this->match_names($dir, $entryname) && $this->exec_ok($dir, $entryname))
           {
             $files[] = realpath($current_entry);
@@ -468,11 +389,14 @@ class sfFinder
             $files = array_merge($files, $this->search_in($current_entry, $depth + 1));
           }
         }
-
-        sort($temp_files);
-        $files = array_merge($files, $temp_files);
+        else
+        {
+          if (($this->type != 'directory' || $this->type == 'any') && ($depth >= $this->mindepth) && !$this->is_discarded($dir, $entryname) && $this->match_names($dir, $entryname) && $this->size_ok($dir, $entryname) && $this->exec_ok($dir, $entryname))
+          {
+            $files[] = realpath($current_entry);
+          }
+        }
       }
-
       closedir($current_dir);
     }
 
@@ -760,7 +684,7 @@ class sfNumberCompare
   {
     if (!preg_match('{^([<>]=?)?(.*?)([kmg]i?)?$}i', $this->test, $matches))
     {
-      throw new sfException(sprintf('don\'t understand "%s" as a test.', $this->test));
+      throw new sfException('don\'t understand "'.$this->test.'" as a test');
     }
 
     $target = array_key_exists(2, $matches) ? $matches[2] : '';
