@@ -254,7 +254,7 @@ class sfWebRequest extends sfRequest
    *
    * @return array An array of re-ordered uploaded file information
    */
-  protected function convertFileInformation(array $taintedFiles)
+  protected function convertFileInformation($taintedFiles)
   {
     return $this->pathsToArray(preg_replace('#^(/[^/]+)?(/name|/type|/tmp_name|/error|/size)([^\s]*)( = [^\n]*)#m', '$1$3$2$4', $this->arrayToPaths($taintedFiles)));
   }
