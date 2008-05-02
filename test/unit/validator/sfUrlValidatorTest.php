@@ -11,7 +11,7 @@
 require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 require_once($_test_dir.'/unit/sfContextMock.class.php');
 
-$t = new lime_test(12, new lime_output_color());
+$t = new lime_test(22, new lime_output_color());
 
 $context = new sfContext();
 $v = new sfUrlValidator();
@@ -25,11 +25,16 @@ $validUrls = array(
   'https://google.com/',
   'http://www.symfony-project.com/',
   'ftp://www.symfony-project.com/file.tgz',
+  'http://www.google.com:8080', 
+  'http://192.168.1.1', 
 );
 
 $invalidUrls = array(
   'google.com',
   'http:/google.com',
+  'http://www.symfony-project,com/', 
+  'http://www.symfony-project@com', 
+  'http://www.symfony-project@com foobar', 
 );
 
 $v->initialize($context);

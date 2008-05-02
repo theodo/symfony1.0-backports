@@ -28,8 +28,16 @@ class sfUrlValidator extends sfValidator
    */
   public function execute(&$value, &$error)
   {
-    $re = '/^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i';
-
+    $re = '~^
+      (https?|ftp)://                         # http or https or ftp
+      (
+        ([a-z0-9-]+\.)+[a-z]{2,6}             # a domain name
+          |                                   #  or
+        \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}    # a IP address
+      )
+      (:[0-9]+)?                              # a port (optional)
+      (/?|/\S+)                               # a /, nothing or a / with something
+    $~ix';
     if (!preg_match($re, $value))
     {
       $error = $this->getParameterHolder()->get('url_error');
