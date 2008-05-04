@@ -12,14 +12,14 @@ require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
 sfLoader::loadHelpers(array('Helper', 'Asset', 'Url', 'Tag', 'Date'));
 
-$t = new lime_test(493, new lime_output_color());
+$t = new lime_test(494, new lime_output_color());
 
 class sfContext
 {
   public $user = null;
   public static $instance = null;
 
-  public function getInstance()
+  static public function getInstance()
   {
     if (!isset(self::$instance))
     {
@@ -80,7 +80,8 @@ $t->is(distance_of_time_in_words($now - 35 * 86400, $now), 'about 1 month', $msg
 $t->is(distance_of_time_in_words($now - 75 * 86400, $now), '3 months', $msg);
 
 $t->is(distance_of_time_in_words($now - 370 * 86400, $now), 'about 1 year', $msg);
-$t->is(distance_of_time_in_words($now - 4 * 365 * 86400, $now), 'over 4 years', $msg);
+$t->is(distance_of_time_in_words($now - 4 * 370 * 86400, $now), 'over 4 years', $msg);
+$t->is(distance_of_time_in_words($now - 1000 * 86400, $now), 'over 2 years', $msg);
 
 // format_date()
 $t->diag('format_date()');
