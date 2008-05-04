@@ -65,8 +65,8 @@ class sfGeneratorConfigHandler extends sfYamlConfigHandler
     // generator parameters
     $generatorParam = (isset($config['param']) ? $config['param'] : array());
 
-    // hack to find the module name
-    preg_match('#'.sfConfig::get('sf_app_module_dir_name').'/([^/]+)/#', $configFiles[0], $match);
+    // hack to find the module name (look for the last /modules/ in path)
+    preg_match('#.*/'.sfConfig::get('sf_app_module_dir_name').'/([^/]+)/#', $configFiles[0], $match);
     $generatorParam['moduleName'] = $match[1];
 
     $data = $generatorManager->generate($config['class'], $generatorParam);
