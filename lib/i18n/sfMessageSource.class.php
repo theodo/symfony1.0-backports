@@ -170,6 +170,7 @@ abstract class sfMessageSource implements sfIMessageSource
       }
 
       $loaded = true;
+      $loadData = true;
 
       if ($this->cache)
       {
