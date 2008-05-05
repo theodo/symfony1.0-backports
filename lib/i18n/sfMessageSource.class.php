@@ -158,6 +158,7 @@ abstract class sfMessageSource implements sfIMessageSource
     $variants = $this->getCatalogueList($catalogue);
 
     $this->messages = array();
+    $loaded = false;
 
     foreach ($variants as $variant)
     {
@@ -168,7 +169,7 @@ abstract class sfMessageSource implements sfIMessageSource
         continue;
       }
 
-      $loadData = true;
+      $loaded = true;
 
       if ($this->cache)
       {
@@ -199,7 +200,7 @@ abstract class sfMessageSource implements sfIMessageSource
       }
     }
 
-    return true;
+    return $loaded;
   }
 
   /**
