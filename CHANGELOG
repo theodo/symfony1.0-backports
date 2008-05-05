@@ -1,7 +1,27 @@
-Version 1.0.14PRE
+Version 1.0.15PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.14
+-------------
+
+This is a bug fix release.
+
+* r8763: fixed DateHelper distance_of_time_in_words() generates incorrect output for some dates (closes #3322) 
+* r8754: validation yml with fillin is used even without other validators defined in the file. (closes #3232)
+* r8720: fixed url validation bug by applied carls patch (1.1 backport). (closes #1373)
+* r8718: Add support for "paramName" option to _auto_complete_field() function (closes #2345)
+* r8716: sfFillInForm adds a content-type meta if non present so that dom->loadHTML works correctly. (closes #2653) 
+* r8709: fillin now handles array notations like <input type="text" name "textinput[]"/> correctly. (closes #2811)
+* r8707: fixed ajax response fillin, which does not include a doctype because it is returned without layout. (closes #1687)
+* r8699: added compat options to propel database  (fixes #3364)
+* r8695: made sfFillInForm work with checkbox arrays as well like checkbox_many[]. (closes #1776, #3399)
+* r8664: made sfMySQLSessionStorage more robust by using SQL date functions and no longer injecting php timestamps. (fixes #3394) 
+* r8651: corrected checking for Eaccelerator in sfProcessCache. (closes #3425)
+* r8445: fixed web debug toolbar in safari (closes #3328, #1673)
+* r8319: added some more information to non symfony exceptions. (closes #2864)
+* r8282: fixed autoloading with CVS (closes #2795)
 
 Version 1.0.13
 -------------
