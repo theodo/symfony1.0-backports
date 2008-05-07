@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -11,7 +11,7 @@
 require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 require_once($_test_dir.'/unit/sfContextMock.class.php');
 
-$t = new lime_test(32, new lime_output_color());
+$t = new lime_test(28, new lime_output_color());
 
 $context = new sfContext();
 $v = new sfEmailValidator();
@@ -31,7 +31,6 @@ $invalidEmails = array(
   'example@',
   'example@localhost',
   'example@example.com@example.com',
-  '<script>alert("t");</script>@toto.fr',
 );
 
 $validEmailsNotStrict = array(
@@ -45,7 +44,6 @@ $invalidEmailsNotStrict = array(
   'example',
   'example@',
   'example@example.com@example.com',
-  '<script>alert("t");</script>@toto.fr',
 );
 
 $v->initialize($context);
