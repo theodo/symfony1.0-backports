@@ -1,7 +1,20 @@
-Version 1.0.15PRE
+Version 1.0.16PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.15
+-------------
+
+This is a bug fix release.
+
+* r8861: fixed problem with PHP 5.2.6 and ini variables access value (closes #3466 - related to http://bugs.php.net/bug.php?id=44936)
+* r8836: fixed some issues with button_to helper (closes #3184)
+* r8831: fixed include_remove option not used in ObjectAdminHelper? (closes #2079)
+* r8827: remote_function will return a complete Javascript statement including the trailing semicolon. (closes #3135)
+* r8825: fixed I18N helper dependency (closes #1794)
+* r8823: fixed FCK editor not being populated by fillin filter. (closes #732)
+* r8819: corrected ID generation for TinyMCE rich editor when no id was given. (closes #3474)
 
 Version 1.0.14
 -------------
