@@ -1,7 +1,14 @@
-Version 1.0.16PRE
+Version 1.0.17PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.16
+-------------
+
+This is a bug fix release.
+
+* r8922: fixed yml validator file can be overriden by a remote attacker (closes #1617)
 
 Version 1.0.15
 -------------
