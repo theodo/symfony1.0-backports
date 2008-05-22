@@ -94,7 +94,7 @@ function excerpt_text($text, $phrase, $radius = 100, $excerpt_string = '...', $e
 
     if ($excerpt_space)
     {
-      //only cut off at ends where $exceprt_string is added
+      // only cut off at ends where $exceprt_string is added
       if($prefix)
       {
         $excerpt = preg_replace('/^(\S+)?\s+?/', ' ', $excerpt);
