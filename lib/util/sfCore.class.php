@@ -203,7 +203,7 @@ class sfCore
         $trace = debug_backtrace();
         if (count($trace) < 1 || ($trace[1]['function'] != 'class_exists' && $trace[1]['function'] != 'is_a'))
         {
-          $error = sprintf('Autoloading of class "%s" failed. Try to clear the symfony cache and refresh. [err0003]', $class);
+          $error = sprintf('Autoloading of class "%s" failed. Try to clear the symfony cache and refresh.', $class);
           $e = new sfAutoloadException($error);
 
           $e->printStackTrace();
