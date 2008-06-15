@@ -225,7 +225,7 @@ class sfFillInForm
       return true;
     }
 
-    return null !== sfToolkit::getArrayValueForPath($values, $name);
+    return null !== sfToolkit::getArrayValueForPathByRef($values, $name);
   }
 
   // use reference to values so that arrays can be shifted.
