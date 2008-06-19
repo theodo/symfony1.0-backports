@@ -206,11 +206,11 @@ class sfBrowser
       $this->dom->validateOnParse = true;
       if ('x' == $matches[1])
       {
-        $this->dom->loadXML($response->getContent());
+        @$this->dom->loadXML($response->getContent());
       }
       else
       {
-        $this->dom->loadHTML($response->getContent());
+        @$this->dom->loadHTML($response->getContent());
       }
       $this->domCssSelector = new sfDomCssSelector($this->dom);
     }
