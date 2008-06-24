@@ -10,7 +10,7 @@
 
 require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
-$t = new lime_test(49, new lime_output_color());
+$t = new lime_test(55, new lime_output_color());
 
 class myRequest extends sfWebRequest
 {
@@ -60,6 +60,25 @@ $t->is($request->getAcceptableContentTypes(), array(), '->getAcceptableContentTy
 $request->acceptableContentTypes = null;
 $_SERVER['HTTP_ACCEPT'] = 'text/xml,application/xhtml+xml,application/xml,text/html;q=0.9,text/plain;q=0.8,*/*;q=0.5';
 $t->is($request->getAcceptableContentTypes(), array('text/xml', 'application/xml', 'application/xhtml+xml', 'text/html', 'text/plain', '*/*'), '->getAcceptableContentTypes() returns an array with all accepted content types');
+
+// ->getUriPrefix()
+$t->diag('->getUriPrefix()');
+$_ENV['SERVER_PORT'] = '80';
+$_ENV['HTTP_HOST'] = 'symfony-project.org:80';
+$t->is($request->getUriPrefix(), 'http://symfony-project.org', '->getUriPrefix() returns no port for standard http port');
+$_ENV['HTTP_HOST'] = 'symfony-project.org';
+$t->is($request->getUriPrefix(), 'http://symfony-project.org', '->getUriPrefix() works fine with no port in HTTP_HOST');
+$_ENV['HTTP_HOST'] = 'symfony-project.org:8088';
+$t->is($request->getUriPrefix(), 'http://symfony-project.org:8088', '->getUriPrefix() works for nonstandard http ports');
+
+$_ENV['HTTPS'] = 'on';
+$_ENV['SERVER_PORT'] = '443';
+$_ENV['HTTP_HOST'] = 'symfony-project.org:443';
+$t->is($request->getUriPrefix(), 'https://symfony-project.org', '->getUriPrefix() returns no port for standard https port');
+$_ENV['HTTP_HOST'] = 'symfony-project.org';
+$t->is($request->getUriPrefix(), 'https://symfony-project.org', '->getUriPrefix() works fine with no port in HTTP_HOST');
+$_ENV['HTTP_HOST'] = 'symfony-project.org:8043';
+$t->is($request->getUriPrefix(), 'https://symfony-project.org:8043', '->getUriPrefix() works for nonstandard https ports');
 
 // ->splitHttpAcceptHeader()
 $t->diag('->splitHttpAcceptHeader()');
