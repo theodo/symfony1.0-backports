@@ -174,7 +174,7 @@ abstract class sfController
     $app     = sfConfig::get('sf_app');
     $env     = sfConfig::get('sf_environment');
 
-    if (!sfConfig::get('sf_available') || sfToolkit::hasLockFile($rootDir.'/'.$app.'_'.$env.'.clilock'))
+    if (!sfConfig::get('sf_available') || sfToolkit::hasLockFile($rootDir.'/'.$app.'_'.$env.'.lck'))
     {
       // application is unavailable
       $moduleName = sfConfig::get('sf_unavailable_module');
