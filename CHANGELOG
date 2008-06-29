@@ -1,7 +1,29 @@
-Version 1.0.17PRE
+Version 1.0.18PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.17
+-------------
+
+This is a bug fix release.
+
+* r9969: changed escaping of metas (and title) from htmlspecialchars to htmlentities to preserve intended encoding. fixes #2860 
+* r9959: fixed gpc_magic_qutes and array in cookie (closes #3458)
+* r9957: fixed convertUrlStringToParameters breaks urlencoded parameter (closes #3788) 
+* r9892: fixed PHPMailer issue with UTF-8 subject being wrapped in middle of utf-8 char. fixes #2957 
+* r9861: fixed getColumnFilterTag() component type (closes #2861) 
+* r9855: fixed generated admin returning to first page regardless on which page the edit was started. fixes #1280 
+* r9829: backported encoding fix for MySQLiConnection from creole trac. fixes #3017 
+* r9806: fixed i18n XLIFF do not handle entities correctly (closes #3792)
+* r9784: fixed autoload paths on windows (closes #1485) 
+* r9668: fixed sfBrowser does not create DOMDocument when response is text/xml (closes #3766)
+* r9538: fixed sfFillInForm to work correctly with nested arrays like: article[description][] 
+* r9260: fixed cache corruption in the production environment for admin generated content.
+* r9216: fillin: fixed bug with html documents having extra attributes in head tag. 
+* r9209: added third mode for fillin xhtml, same as xml but without prolog (+test). fixes #3568 
+* r9182: fixed phpmailer EOL line style using now PHP_EOL constant. fixes #3313 #3562
+* r9177: 1.0: backported fix from r8926. fixes #2161
 
 Version 1.0.16
 -------------
