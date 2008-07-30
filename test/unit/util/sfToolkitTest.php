@@ -10,7 +10,7 @@
 
 require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
-$t = new lime_test(70, new lime_output_color());
+$t = new lime_test(72, new lime_output_color());
 
 // ::stringToArray()
 $t->diag('::stringToArray()');
@@ -172,3 +172,24 @@ $t->is(
   array(2 => array('bis', 'bes'), 3 => 'tre', 4 => 'quattro'),
   '::arrayDeepMerge() recursively merges arrays preserving numerical keys'
 );
+
+
+$arr = array(
+  'foobar' => 'foo',
+  'foo' => array(
+    'bar' => array(
+      'baz' => 'foo bar',
+    ),
+  ),
+  'bar' => array(
+    'foo',
+    'bar',
+  ),
+  'simple' => 'string',
+);
+
+// ::getArrayValueForPath()
+$t->diag('::getArrayValueForPath()');
+
+$t->is(sfToolkit::getArrayValueForPath($arr, 'foo[bar][baz][booze]'), null, '::getArrayValueForPath() is not fooled by php mistaking strings and array');
+$t->is(sfToolkit::getArrayValueForPathByRef($arr, 'foo[bar][baz][booze]'), null, '::getArrayValueForPathByRef() is not fooled by php mistaking strings and array');
