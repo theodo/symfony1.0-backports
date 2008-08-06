@@ -92,7 +92,7 @@ class sfToolkit
     }
 
     // close file pointer
-    fclose($fp);
+    closedir($fp);
   }
 
   /**
