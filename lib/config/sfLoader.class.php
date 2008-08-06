@@ -19,17 +19,21 @@
 class sfLoader
 {
   /**
-   * Gets directories where model classes are stored.
+   * Gets directories where model classes are stored. The order of returned paths is lowest precedence
+   * to highest precedence.
    *
    * @return array An array of directories
    */
   static public function getModelDirs()
   {
-    $dirs = array(sfConfig::get('sf_lib_dir').'/model' ? sfConfig::get('sf_lib_dir').'/model' : 'lib/model'); // project
+    $dirs = array(); // project
+
     if ($pluginDirs = glob(sfConfig::get('sf_plugins_dir').'/*/lib/model'))
     {
       $dirs = array_merge($dirs, $pluginDirs);                                                                // plugins
     }
+
+    $dirs[] = sfConfig::get('sf_lib_dir') ? sfConfig::get('sf_lib_dir').'/model' : 'lib/model';
 
     return $dirs;
   }
