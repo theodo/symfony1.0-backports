@@ -518,7 +518,7 @@ class sfBrowser
 
   protected function newSession()
   {
-    $_SERVER['session_id'] = md5(uniqid(rand(), true));
+    $this->defaultServerArray['session_id'] = $_SERVER['session_id'] = md5(uniqid(rand(), true));
   }
 }
 
