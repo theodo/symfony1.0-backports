@@ -58,6 +58,8 @@ class sfPhpConfigHandler extends sfYamlConfigHandler
 
         // key is overridable?
         // 63 is returned by PHP 5.2.6 instead of 7 when a php.ini key is changed several times per script
+        // PHP bug:         http://bugs.php.net/bug.php?id=44936
+        // Resolution diff: http://cvs.php.net/viewvc.cgi/ZendEngine2/zend_ini.c?r1=1.39.2.2.2.26&r2=1.39.2.2.2.27&pathrev=PHP_5_2
         if ($configs[$key]['access'] != 7 && $configs[$key]['access'] != 63)
         {
           $error = sprintf('Configuration file "%s" specifies key "%s" which cannot be overrided.', $configFiles[0], $key);
