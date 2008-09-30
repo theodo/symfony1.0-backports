@@ -1,7 +1,27 @@
-Version 1.0.18PRE
+Version 1.0.19PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.18
+-------------
+
+This is a bug fix release.
+
+* r11850: ignore doctrine schema in the propel tasks (closes #4027)
+* r11711: fixed Ukrainian language file. (closes #4440)
+* r10964: fixed sfFileLogger file closing
+* r10947: fixed sfDomCssSelector attribute regex (closes #3922)
+* r10841: fixed Hours & Minutes not parsed by sfI18N::getTimestampForCulture() (backported from r9853) (closes #2896)
+* r10833: fixed % causes escaping of single quotes in app.yml in some circumstances (closes #2849)
+* r10741: fixed _safe_cache_remove() generates 'No such file' error and fails (closes #4057)
+* r10739: fixed sfBrowser::restart() doesn't reset the session
+* r10726: fixed typo in Propel (needed for PHP 5.3)
+* r10701: fixed class autoload inclusion order
+* r10618: fixed sfBrowser::click throw unexpected PHP error
+* r10328: fixed plugin model overriding (closes #3227)
+* r10059: fixed opendir closed by fclose instead of closedir (closes #3880)
+* r10029: fixed argv may not be registered by PHP (closes #2943)
 
 Version 1.0.17
 -------------
