@@ -78,7 +78,7 @@ class sfAutoloadConfigHandler extends sfYamlConfigHandler
         $recursive = ((isset($entry['recursive'])) ? $entry['recursive'] : false);
         if (!$recursive)
         {
-          $finder->maxdepth(1);
+          $finder->maxdepth(0);
         }
 
         // exclude files or directories?
