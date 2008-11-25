@@ -1,7 +1,19 @@
-Version 1.0.19PRE
+Version 1.0.20PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.19
+-------------
+
+This is a bug fix release.
+
+* r13098: fixed typo in autoload recursive setting
+* r12958: r12811 introduced a regression: fixtures order is totally random, as sfFinder returns directories entry in arbitrary order.
+* r12811: fixed order of data deleting in sfPropelData (closes #4783)
+* r12201: ixed select_tag() with sfOutputEscaperArrayDecorator: fatal error in template (closes #3923)
+* r12197: fixed Criteria::equals() needs to compare ->groupByColumns with operand's columns (closes #4623)
+* r11954: fixed fWebRequest::getPathInfo doesn't completely remove querystring
 
 Version 1.0.18
 -------------
