@@ -374,12 +374,17 @@ class sfWebRequest extends sfRequest
   {
     $pathArray = $this->getPathInfoArray();
 
-    if ($this->isAbsUri())
+    // for IIS with rewrite module (IIFR, ISAPI Rewrite, ...)
+    if ('HTTP_X_REWRITE_URL' == sfConfig::get('sf_path_info_key'))
     {
-      return $pathArray['REQUEST_URI'];
+      $uri = isset($pathArray['HTTP_X_REWRITE_URL']) ? $pathArray['HTTP_X_REWRITE_URL'] : '';
+    }
+    else
+    {
+      $uri = isset($pathArray['REQUEST_URI']) ? $pathArray['REQUEST_URI'] : '';
     }
 
-    return $this->getUriPrefix().$pathArray['REQUEST_URI'];
+    return $this->isAbsUri() ? $uri : $this->getUriPrefix().$uri;
   }
 
   /**
