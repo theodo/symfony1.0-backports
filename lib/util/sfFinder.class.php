@@ -357,7 +357,7 @@ class sfFinder
       return array();
     }
 
-    if (is_link($dir) && !$this->follow_link)
+    if ((!$this->follow_link) && is_link($dir))
     {
       return array();
     }
@@ -372,7 +372,7 @@ class sfFinder
         if ($entryname == '.' || $entryname == '..') continue;
 
         $current_entry = $dir.DIRECTORY_SEPARATOR.$entryname;
-        if (is_link($current_entry) && !$this->follow_link)
+        if ((!$this->follow_link) && is_link($current_entry))
         {
           continue;
         }
