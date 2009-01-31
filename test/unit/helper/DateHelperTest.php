@@ -12,7 +12,7 @@ require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
 sfLoader::loadHelpers(array('Helper', 'Asset', 'Url', 'Tag', 'Date'));
 
-$t = new lime_test(494, new lime_output_color());
+$t = new lime_test(500, new lime_output_color());
 
 class sfContext
 {
