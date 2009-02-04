@@ -523,54 +523,34 @@ class sfFileCache extends sfCache
   */
   protected function write($path, $file, $data)
   {
-    $try = 1;
-    while ($try <= 2)
+    $current_umask = umask();
+    umask(0000);
+    if (!is_dir($path))
     {
-      $fp = @fopen($path.$file, 'wb');
-      if ($fp)
-      {
-        if ($this->fileLocking)
-        {
-          @flock($fp, LOCK_EX);
-        }
-        if ($this->readControl)
-        {
-          @fwrite($fp, $this->hash($data), 32);
-        }
-        @fwrite($fp, $data);
-        if ($this->fileLocking)
-        {
-          @flock($fp, LOCK_UN);
-        }
-        @fclose($fp);
-
-        // change file mode
-        $current_umask = umask();
-        umask(0000);
-        chmod($path.$file, 0666);
-        umask($current_umask);
-
-        return true;
-      }
-      else
-      {
-        if ($try == 1 && !is_dir($path))
-        {
-          // create directory structure if needed
-          $current_umask = umask(0000);
-          mkdir($path, 0777, true);
-          umask($current_umask);
-
-          $try = 2;
-        }
-        else
-        {
-          $try = 999;
-        }
-      }
+     // create directory structure if needed
+     mkdir($path, 0777, true);
     }
+    
+    $tmpFile = $file . '.' . getmypid();
+    
+    if (!$fp = @fopen($path.$tmpFile, 'wb'))
+    {
+         throw new sfCacheException(sprintf('Unable to write cache file "%s".', $path.$file));
+    }
+    
+    if ($this->readControl)
+    {
+      @fwrite($fp, $this->hash($data), 32);
+    }
+    @fwrite($fp, $data);
+    @fclose($fp);
+    
+    chmod($path.$tmpFile, 0666);
+    @unlink($path.$file);
+    rename($path.$tmpFile, $path.$file);
+    umask($current_umask);
 
-    throw new sfCacheException('Unable to write cache file "'.$path.$file.'"');
+    return true; 
   }
 
  /**
