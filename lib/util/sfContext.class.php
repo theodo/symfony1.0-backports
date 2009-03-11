@@ -131,6 +131,11 @@ class sfContext
      return $this->controller;
    }
 
+   /**
+    * Retrieve the logger.
+    *
+    * @return sfLogger The current sfLogger implementation instance.
+    */
    public function getLogger()
    {
      return $this->logger;
