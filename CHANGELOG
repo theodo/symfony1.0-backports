@@ -1,7 +1,25 @@
-Version 1.0.20PRE
+Version 1.0.21PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.20
+-------------
+
+This is a bug fix release.
+
+* r16170: fixed typo (closes #6014)
+* r16165: added some missing PHPDoc (closes #6054)
+* r15765: fixed propel:schema-to-yml composite foreign-Keys wrongly converted (closes #5483)
+* r15263: fixed issue with cache file corruption due to heavy load. (closes #5729)
+* r15223: escaped variables in exceptions in the development environment (closes #5743)
+* r14385: fixed i18N and open_basedir restriction problem (closes #1445)
+* r14266: improvement in search_in performance of sfFinder when not searching symlinks (closes #5431)
+* r14120: fixed select_timezone_tag not possible to display city. (closes #5359)
+* r13893: backported performance patch for sfToolkit::stripComments. (closes #5237)
+* r13416: fixed sfRequest::getUri() when using Microsoft IIS (closes #4886)
+* r13408: fixed long line in a PHP doc (closes #4750)
+* r13386: added mime type for PDF (closes #4483)
 
 Version 1.0.19
 -------------
