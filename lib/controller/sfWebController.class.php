@@ -76,7 +76,7 @@ abstract class sfWebController extends sfController
     else
     {
       // use GET format
-      $divider = ini_get('arg_separator.output');
+      $divider = '&';
       $equals  = '=';
       $querydiv = '?';
     }
