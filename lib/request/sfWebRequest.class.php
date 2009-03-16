@@ -418,10 +418,10 @@ class sfWebRequest extends sfRequest
       $protocol = 'http';
     }
 
-    $host = explode(":", $pathArray['HTTP_HOST']);
+    $host = explode(":", $this->getHost());
     if (count($host) == 1)
     {
-      $host[] = $pathArray['SERVER_PORT'];
+      $host[] = isset($pathArray['SERVER_PORT']) ? $pathArray['SERVER_PORT'] : '';
     }
 
     if ($host[1] == $standardPort || empty($host[1]))
