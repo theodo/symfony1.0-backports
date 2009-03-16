@@ -131,7 +131,7 @@ class sfLogger
    */
   public function log($message, $priority = SF_LOG_INFO)
   {
-    if ($this->level < $priority)
+    if ($this->getLogLevel() < $priority)
     {
       return;
     }
