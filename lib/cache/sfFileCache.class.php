@@ -545,15 +545,18 @@ class sfFileCache extends sfCache
     @fwrite($fp, $data);
     @fclose($fp);
 
-    chmod($tmpFile, 0666);
-
-    // windows needs unlink before rename. unlink needs file_exists check. otherwise warnings occur
-    // this is not atomic as it should be, but PHP has no better support for it
-    if (file_exists($path.$file))
+    // Hack from Agavi (http://trac.agavi.org/changeset/3979)
+    // With php < 5.2.6 on win32, renaming to an already existing file doesn't work, but copy does,
+    // so we simply assume that when rename() fails that we are on win32 and try to use copy()
+    if (!@rename($tmpFile, $path.$file))
     {
-      unlink($path.$file);
+      if (copy($tmpFile, $path.$file))
+      {
+        unlink($tmpFile);
+      }
     }
-    rename($tmpFile, $path.$file);
+
+    chmod($path.$file, 0666);
     umask($current_umask);
 
     return true;
