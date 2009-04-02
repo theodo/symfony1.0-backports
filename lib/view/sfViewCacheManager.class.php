@@ -281,21 +281,37 @@ class sfViewCacheManager
   /**
    * Returns true if the current content is cacheable.
    *
-   * @param string Internal uniform resource identifier
+   * If no $actionName parameter is provided the first parameter is assumed to
+   * be an internal URI which is then parsed for $moduleName and $actionName
+   * values.
    *
-   * @return boolean true, if the content is cacheable otherwise false
+   * @param  string $moduleName Module name or internal URI if no $actionName parameter is provided.
+   * @param  string $actionName
+   *
+   * @return bool true, if the content is cacheable otherwise false
    */
-  public function isCacheable($internalUri)
+  public function isCacheable($moduleName, $actionName = null)
   {
-    list($route_name, $params) = $this->controller->convertUrlStringToParameters($internalUri);
-
-    if (isset($this->cacheConfig[$params['module']][$params['action']]))
+    if (count($_GET) || count($_POST))
     {
-      return ($this->cacheConfig[$params['module']][$params['action']]['lifeTime'] > 0);
+      return false;
     }
-    else if (isset($this->cacheConfig[$params['module']]['DEFAULT']))
+
+    if (is_null($actionName))
     {
-      return ($this->cacheConfig[$params['module']]['DEFAULT']['lifeTime'] > 0);
+      list(, $params) = $this->controller->convertUrlStringToParameters($moduleName);
+
+      $moduleName = $params['module'];
+      $actionName = $params['action'];
+    }
+
+    if (isset($this->cacheConfig[$moduleName][$actionName]))
+    {
+      return $this->cacheConfig[$moduleName][$actionName]['lifeTime'] > 0;
+    }
+    else if (isset($this->cacheConfig[$moduleName]['DEFAULT']))
+    {
+      return $this->cacheConfig[$moduleName]['DEFAULT']['lifeTime'] > 0;
     }
 
     return false;
