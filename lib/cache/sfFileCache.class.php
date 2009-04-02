@@ -527,35 +527,37 @@ class sfFileCache extends sfCache
     umask(0000);
     if (!is_dir($path))
     {
-     // create directory structure if needed
-     mkdir($path, 0777, true);
+      // create directory structure if needed
+      mkdir($path, 0777, true);
     }
-    
-    $tmpFile = $file . '.' . getmypid();
-    
-    if (!$fp = @fopen($path.$tmpFile, 'wb'))
+
+    $tmpFile = tempnam(dirname($path), basename($file));
+print $tmpFile."***\n";
+die();
+    if (!$fp = @fopen($tmpFile, 'wb'))
     {
-         throw new sfCacheException(sprintf('Unable to write cache file "%s".', $path.$file));
+      throw new sfCacheException(sprintf('Unable to write cache file "%s".', $path.$file));
     }
-    
+
     if ($this->readControl)
     {
       @fwrite($fp, $this->hash($data), 32);
     }
     @fwrite($fp, $data);
     @fclose($fp);
-    
-    chmod($path.$tmpFile, 0666);
+
+    chmod($tmpFile, 0666);
+
     // windows needs unlink before rename. unlink needs file_exists check. otherwise warnings occur
     // this is not atomic as it should be, but PHP has no better support for it
     if (file_exists($path.$file))
     {
       unlink($path.$file);
     }
-    rename($path.$tmpFile, $path.$file);
+    rename($tmpFile, $path.$file);
     umask($current_umask);
 
-    return true; 
+    return true;
   }
 
  /**
