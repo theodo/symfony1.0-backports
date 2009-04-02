@@ -532,8 +532,7 @@ class sfFileCache extends sfCache
     }
 
     $tmpFile = tempnam(dirname($path), basename($file));
-print $tmpFile."***\n";
-die();
+
     if (!$fp = @fopen($tmpFile, 'wb'))
     {
       throw new sfCacheException(sprintf('Unable to write cache file "%s".', $path.$file));
