@@ -12,7 +12,7 @@ require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
 sfLoader::loadHelpers(array('Helper', 'Tag', 'Number'));
 
-$t = new lime_test(2, new lime_output_color());
+$t = new lime_test(4, new lime_output_color());
 
 // format_number()
 $t->diag('format_number()');
@@ -22,3 +22,5 @@ $t->is(format_number(10012.1, 'en'), '10,012.1', 'format_number() takes a number
 $t->todo('format_number() takes the current user culture if no second argument is given');
 
 // format_currency()
+$t->is(format_currency(1200000.00, 'USD', 'en'), 'US$1,200,000.00', 'format_currency() takes a number as its first argument');
+$t->is(format_currency('1200000', 'USD', 'en'), 'US$1,200,000.00', 'format_currency() takes a number as its first argument');
