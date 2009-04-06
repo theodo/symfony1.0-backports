@@ -106,7 +106,7 @@ class sfAutoloadConfigHandler extends sfYamlConfigHandler
             if (isset($entry['prefix']))
             {
               // FIXME: does not work for plugins installed with a symlink
-              preg_match('~^'.str_replace('\*', '(.+?)', preg_quote(str_replace('/', DIRECTORY_SEPARATOR, $path), '~')).'~', $file, $match);
+              preg_match('~^'.str_replace('\*', '(.+?)', preg_quote(str_replace('/', DIRECTORY_SEPARATOR, $path), '~')).'~', str_replace('/', DIRECTORY_SEPARATOR, $file), $match);
               if (isset($match[$entry['prefix']]))
               {
                 $prefix = $match[$entry['prefix']].'/';
