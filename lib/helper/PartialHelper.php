@@ -195,7 +195,7 @@ function get_component($moduleName, $componentName, $vars = array())
 
     $retval = $view->render($componentInstance->getVarHolder()->getAll());
 
-    if ($cacheManager && $cacheManager->isCacheable($moduleName, $actionName))
+    if ($cacheManager && (!sfConfig::get('sf_lazy_cache_key') || $cacheManager->isActionCacheable($moduleName, $actionName)))
     {
       $uri = _get_cache_uri($moduleName, $actionName, $vars);
       $retval = _set_cache($cacheManager, $uri, $retval);
@@ -272,7 +272,7 @@ function get_partial($templateName, $vars = array())
   $view->initialize($context, $moduleName, $actionName, '');
   $retval = $view->render($vars);
 
-  if ($cacheManager && $cacheManager->isCacheable($moduleName, $actionName))
+  if ($cacheManager && (!sfConfig::get('sf_lazy_cache_key') || $cacheManager->isActionCacheable($moduleName, $actionName)))
   {
     $uri = _get_cache_uri($moduleName, $actionName, $vars);
     $retval = _set_cache($cacheManager, $uri, $retval);
@@ -283,7 +283,7 @@ function get_partial($templateName, $vars = array())
 
 function _get_cache($cacheManager, $moduleName, $actionName = null, $vars = array())
 {
-  if (!$cacheManager->isCacheable($moduleName, $actionName))
+  if (!$cacheManager->isActionCacheable($moduleName, $actionName))
   {
     return null;
   }
