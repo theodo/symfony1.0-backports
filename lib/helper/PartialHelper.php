@@ -118,7 +118,6 @@ function get_component($moduleName, $componentName, $vars = array())
   // check cache
   if ($cacheManager = $context->getViewCacheManager())
   {
-    $cacheManager->registerConfiguration($moduleName);
     if ($retval = _get_cache($cacheManager, $moduleName, $actionName, $vars))
     {
       return $retval;
@@ -261,7 +260,6 @@ function get_partial($templateName, $vars = array())
 
   if ($cacheManager = $context->getViewCacheManager())
   {
-    $cacheManager->registerConfiguration($moduleName);
     if ($retval = _get_cache($cacheManager, $moduleName, $actionName, $vars))
     {
       return $retval;

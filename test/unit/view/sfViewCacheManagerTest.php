@@ -12,6 +12,13 @@ require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
 $t = new lime_test(12, new lime_output_color());
 
+class myViewCacheManager extends sfViewCacheManager
+{
+  public function registerConfiguration($moduleName)
+  {
+  }
+}
+
 class myController extends sfWebController
 {
 }
@@ -111,7 +118,7 @@ $r->connect('default', '/:module/:action/*');
 
 // ->initialize()
 $t->diag('->initialize()');
-$m = new sfViewCacheManager();
+$m = new myViewCacheManager();
 $t->is($m->getContext(), null, '->initialize() takes a sfContext object as its first argument');
 
 // ->getContext()
@@ -168,7 +175,7 @@ $t->is($m->has('module/action'), false, '->remove() removes cache content for an
 function get_cache_manager($context)
 {
   myCache::clear();
-  $m = new sfViewCacheManager();
+  $m = new myViewCacheManager();
   $m->initialize($context, 'myCache');
 
   return $m;
