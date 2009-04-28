@@ -10,7 +10,7 @@
 
 require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
 
-$t = new lime_test(20, new lime_output_color());
+$t = new lime_test(22, new lime_output_color());
 
 class myViewConfigHandler extends sfViewConfigHandler
 {
@@ -43,11 +43,33 @@ $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'ad
 
 $handler->mergeConfig(array(
   'myView' => array(
+    'stylesheets' => array(array('foobar' => array('position' => 'last'))),
+  ),
+));
+$content = <<<EOF
+  \$response->addStylesheet('foobar', 'last', array ());
+
+EOF;
+$t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() adds stylesheets to the response');
+
+$handler->mergeConfig(array(
+  'myView' => array(
     'javascripts' => array('foobar'),
   ),
 ));
 $content = <<<EOF
-  \$response->addJavascript('foobar');
+  \$response->addJavascript('foobar', '');
+
+EOF;
+$t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() adds JavaScript to the response');
+
+$handler->mergeConfig(array(
+  'myView' => array(
+    'javascripts' => array(array('foobar' => array('position' => 'last'))),
+  ),
+));
+$content = <<<EOF
+  \$response->addJavascript('foobar', 'last');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() adds JavaScript to the response');
@@ -157,8 +179,8 @@ $handler->mergeConfig(array(
   ),
 ));
 $content = <<<EOF
-  \$response->addJavascript('all_foobar');
-  \$response->addJavascript('foobar');
+  \$response->addJavascript('all_foobar', '');
+  \$response->addJavascript('foobar', '');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() adds view-specific javascripts after application-wide assets');
@@ -172,8 +194,8 @@ $handler->mergeConfig(array(
   ),
 ));
 $content = <<<EOF
-  \$response->addJavascript('all_foobar');
-  \$response->addJavascript('foobar');
+  \$response->addJavascript('all_foobar', '');
+  \$response->addJavascript('foobar', '');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() adds view-specific javascripts after application-wide assets');
@@ -187,8 +209,8 @@ $handler->mergeConfig(array(
   ),
 ));
 $content = <<<EOF
-  \$response->addJavascript('default_foobar');
-  \$response->addJavascript('foobar');
+  \$response->addJavascript('default_foobar', '');
+  \$response->addJavascript('foobar', '');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() adds view-specific javascripts after default assets');
@@ -202,8 +224,8 @@ $handler->mergeConfig(array(
   ),
 ));
 $content = <<<EOF
-  \$response->addJavascript('default_foobar');
-  \$response->addJavascript('foobar');
+  \$response->addJavascript('default_foobar', '');
+  \$response->addJavascript('foobar', '');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() adds view-specific javascripts after default assets');
@@ -217,8 +239,8 @@ $handler->mergeConfig(array(
   ),
 ));
 $content = <<<EOF
-  \$response->addJavascript('default_foobar');
-  \$response->addJavascript('all_foobar');
+  \$response->addJavascript('default_foobar', '');
+  \$response->addJavascript('all_foobar', '');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() adds application-specific javascripts after default assets');
@@ -232,8 +254,8 @@ $handler->mergeConfig(array(
   ),
 ));
 $content = <<<EOF
-  \$response->addJavascript('default_foobar');
-  \$response->addJavascript('all_foobar');
+  \$response->addJavascript('default_foobar', '');
+  \$response->addJavascript('all_foobar', '');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() adds application-specific javascripts after default assets');
@@ -265,8 +287,8 @@ $handler->mergeConfig(array(
   ),
 ));
 $content = <<<EOF
-  \$response->addJavascript('all_foo');
-  \$response->addJavascript('foobar');
+  \$response->addJavascript('all_foo', '');
+  \$response->addJavascript('foobar', '');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() supports the - option to remove one javascript previously added');
@@ -288,7 +310,7 @@ $handler->mergeConfig(array(
   ),
 ));
 $content = <<<EOF
-  \$response->addJavascript('baz');
+  \$response->addJavascript('baz', '');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() supports the -* option to remove all javascripts previously added');
@@ -323,7 +345,7 @@ $handler->mergeConfig(array(
 ));
 $content = <<<EOF
   \$response->addStylesheet('bar', '', array ());
-  \$response->addJavascript('bar');
+  \$response->addJavascript('bar', '');
 
 EOF;
 $t->is(fix_content($handler->addHtmlAsset('myView')), fix_content($content), 'addHtmlAsset() supports the -* option to remove all assets previously added');

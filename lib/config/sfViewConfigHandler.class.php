@@ -294,19 +294,35 @@ class sfViewConfigHandler extends sfYamlConfigHandler
     $tmp = array();
     foreach ((array) $javascripts as $js)
     {
-      $js = $this->replaceConstants($js);
-
-      if ('-*' == $js)
+      $position = '';
+      if (is_array($js))
       {
-        $tmp = array();
-      }
-      else if ('-' == $js[0])
-      {
-        unset($tmp[substr($js, 1)]);
+        $key = key($js);
+        $options = $js[$key];
+        if (isset($options['position']))
+        {
+          $position = $options['position'];
+          unset($options['position']);
+        }
       }
       else
       {
-        $tmp[$js] = sprintf("  \$response->addJavascript('%s');", $js);
+        $key = $js;
+      }
+
+      $key = $this->replaceConstants($key);
+
+      if ('-*' == $key)
+      {
+        $tmp = array();
+      }
+      else if ('-' == $key[0])
+      {
+        unset($tmp[substr($key, 1)]);
+      }
+      else
+      {
+        $tmp[$key] = sprintf("  \$response->addJavascript('%s', '%s');", $key, $position);
       }
     }
 
