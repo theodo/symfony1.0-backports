@@ -242,9 +242,6 @@ class sfViewConfigHandler extends sfYamlConfigHandler
   protected function addHtmlAsset($viewName = '')
   {
     $data = array();
-    $omit = array();
-    $delete = array();
-    $delete_all = false;
 
     // Merge the current view's stylesheets with the app's default stylesheets
     $stylesheets = $this->mergeConfigValue('stylesheets', $viewName);
@@ -285,9 +282,6 @@ class sfViewConfigHandler extends sfYamlConfigHandler
     }
 
     $data = array_merge($data, array_values($tmp));
-
-    $omit = array();
-    $delete_all = false;
 
     // Populate $javascripts with the values from ONLY the current view
     $javascripts = $this->mergeConfigValue('javascripts', $viewName);
