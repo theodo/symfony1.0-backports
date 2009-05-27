@@ -28,6 +28,8 @@ $h->register_glob($h->base_dir.'/functional/*/*Test.php');
 // other tests
 $h->register_glob($h->base_dir.'/other/*Test.php');
 
-$h->run();
+$ret = $h->run();
 
 testAutoloader::removeCache();
+
+exit($ret ? 0 : 1);
