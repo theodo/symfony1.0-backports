@@ -67,16 +67,16 @@ class sfMessageSource_XLIFF extends sfMessageSource
    */
   protected function &loadData($filename)
   {
-    //load it.
-
-    $XML = simplexml_load_file($filename);
-
-    if (!$XML)
+    libxml_use_internal_errors(true);
+    if (!$xml = simplexml_load_file($filename))
     {
-      return false;
-    }
+      $error = false;
 
-    $translationUnit = $XML->xpath('//trans-unit');
+      return $error;
+    }
+    libxml_use_internal_errors(false);
+
+    $translationUnit = $xml->xpath('//trans-unit');
 
     $translations = array();
 
