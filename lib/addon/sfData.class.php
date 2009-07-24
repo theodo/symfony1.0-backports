@@ -17,7 +17,6 @@
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @version    SVN: $Id$
  */
-
 abstract class sfData
 {
   protected
@@ -39,7 +38,7 @@ abstract class sfData
    * Gets the current value of the flag that indicates whether
    * current data is to be deleted or not.
    *
-   * @returns boolean
+   * @return boolean
    */
   public function getDeleteCurrentData()
   {
