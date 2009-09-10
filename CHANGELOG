@@ -1,7 +1,27 @@
-Version 1.0.21PRE
+Version 1.0.22PRE
 -------------
 
 This is a bug fix release.
+
+Version 1.0.21
+-------------
+
+This is a bug fix release.
+
+* r20606: fixed a Strict Standards warning under PHP 5.3 (closes #6933)
+* r19912: calling dataDir statically as it should be in sfCultureInfo (fixes #6604)
+* r19911: added check in sfActions that prefents infinite recursion in the execute method when the action name is empty (fixes #6710)
+* r18746: fixed test plan for CLI tasks (closes #6545)
+* r18866: updated lime to 1.0.6
+* r18492: fixed exception page should execute html/javascript code when using html format (closes #5743)
+* r17861: MCE Texteditor now can align images correctly (closes #5745)
+* r17468: fixed cache manager when the cache partial or component is not from the same module as the same action (closes #6265, #5814)
+* r17386: fixed confirm dialog does not work in ie6 (closes #4152)
+* r17357: doSelectWithI18n no longer accidentally modifies the Criteria passed to it (fixes #6243)
+* r17217: Added sf_lazy_cache_key setting to address possible backward compatibility break.
+* r17047: fixed autoloading configuration cache behaves differently on Windows and Linux (closes #6232)
+* r17045: added application/x-zip for Firefox 3 in the compat plugin (refs #6191)
+* r16348: fixed arg_separator.output used in sfRouting (closes #6084)
 
 Version 1.0.20
 -------------
