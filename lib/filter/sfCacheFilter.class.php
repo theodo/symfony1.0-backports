@@ -115,7 +115,7 @@ class sfCacheFilter extends sfFilter
     $uri = sfRouting::getInstance()->getCurrentInternalUri();
 
     // save page in cache
-    if ($this->cache[$uri]['page'])
+    if (isset($this->cache[$uri]['page']))
     {
       // set some headers that deals with cache
       if ($lifetime = $this->cacheManager->getClientLifeTime($uri, 'page'))
@@ -133,7 +133,7 @@ class sfCacheFilter extends sfFilter
 
       $this->setPageCache($uri);
     }
-    else if ($this->cache[$uri]['action'])
+    else if (isset($this->cache[$uri]['action']))
     {
       // save action in cache
       $this->setActionCache($uri);
