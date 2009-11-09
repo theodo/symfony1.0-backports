@@ -57,6 +57,7 @@ class sfFunctionCache extends sfFileCache
         list($class, $method) = explode('::', $target);
         try
         {
+          class_exists($class);
           $result = call_user_func_array(array($class, $method), $arguments);
         }
         catch (Exception $e)
