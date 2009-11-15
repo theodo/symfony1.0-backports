@@ -259,9 +259,18 @@ class sfWebResponse extends sfResponse
    */
   public function sendHttpHeaders()
   {
+    $headers = $this->getParameterHolder()->getAll('symfony/response/http/headers')
+
     // status
     $status = 'HTTP/1.0 '.$this->statusCode.' '.$this->statusText;
     header($status);
+
+    if (substr(php_sapi_name(), 0, 3) == 'cgi')
+    {
+      // fastcgi servers cannot send this status information because it was sent by them already due to the HTT/1.0 line
+      // so we can safely unset them. see ticket #3191
+      unset($headers['Status']);
+    }
 
     if (sfConfig::get('sf_logging_enabled'))
     {
@@ -269,7 +278,7 @@ class sfWebResponse extends sfResponse
     }
 
     // headers
-    foreach ($this->getParameterHolder()->getAll('symfony/response/http/headers') as $name => $value)
+    foreach ($headers as $name => $value)
     {
       header($name.': '.$value);
 
