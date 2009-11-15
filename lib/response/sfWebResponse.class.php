@@ -259,7 +259,7 @@ class sfWebResponse extends sfResponse
    */
   public function sendHttpHeaders()
   {
-    $headers = $this->getParameterHolder()->getAll('symfony/response/http/headers')
+    $headers = $this->getParameterHolder()->getAll('symfony/response/http/headers');
 
     // status
     $status = 'HTTP/1.0 '.$this->statusCode.' '.$this->statusText;
