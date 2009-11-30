@@ -209,7 +209,7 @@ class sfWebResponse extends sfResponse
   /**
    * Gets HTTP header current value.
    *
-   * @return array
+   * @return string
    */
   public function getHttpHeader($name, $default = null)
   {

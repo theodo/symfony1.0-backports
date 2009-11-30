@@ -171,7 +171,6 @@ class sfCacheFilter extends sfFilter
     if ($this->response->hasHttpHeader('Last-Modified') && !sfConfig::get('sf_debug'))
     {
       $last_modified = $this->response->getHttpHeader('Last-Modified');
-      $last_modified = $last_modified[0];
       if ($this->request->getHttpHeader('IF_MODIFIED_SINCE') == $last_modified)
       {
         $this->response->setStatusCode(304);
