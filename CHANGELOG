@@ -1,7 +1,16 @@
-Version 1.0.22PRE
+Version 1.0.22
 -------------
 
 This is a bug fix release.
+
+* r26992: replaced prototype 1.5.0 with 1.5.1.2 (security fix)
+* r24622: allowed I18N functions with __toString methods
+* r24619: fixed incorrect array access of lastModified header
+* r23984: not setting status header for servers in cgi-sapi
+* r23886: fixed notice on undefined uri in sfCacheFilter (fixes #6514)
+* r23725: stimulating autoloading in sfFunctionCache
+* r23543: fixed deprecated use of split for PHP 5.3 (closes #7509)
+* r22498: removed different formatting for currency symbol
 
 Version 1.0.21
 -------------
