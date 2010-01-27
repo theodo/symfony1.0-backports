@@ -1,7 +1,7 @@
 Version 1.0.22
 -------------
 
-This is a bug fix release.
+This is the last bug fix release.
 
 * r26992: replaced prototype 1.5.0 with 1.5.1.2 (security fix)
 * r24622: allowed I18N functions with __toString methods
