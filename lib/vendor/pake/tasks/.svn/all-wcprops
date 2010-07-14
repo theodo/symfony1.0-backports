@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/tasks
+END
+pakePhingTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/tasks/pakePhingTask.class.php
+END
+pakePearTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/tasks/pakePearTask.class.php
+END
+pakeSimpletestTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/tasks/pakeSimpletestTask.class.php
+END

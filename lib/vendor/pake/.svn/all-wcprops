@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake
+END
+pakeFinder.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeFinder.class.php
+END
+pakeColor.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeColor.class.php
+END
+pakeException.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeException.class.php
+END
+pakeNumberCompare.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeNumberCompare.class.php
+END
+pakeApp.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeApp.class.php
+END
+pakeFunction.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeFunction.php
+END
+pakeGlobToRegex.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeGlobToRegex.class.php
+END
+pakeFileTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeFileTask.class.php
+END
+pakeGetopt.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeGetopt.class.php
+END
+pakeTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeTask.class.php
+END
+pakeYaml.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/!svn/ver/4979/tools/pake/tags/RELEASE_1_1_5/lib/pake/pakeYaml.class.php
+END
