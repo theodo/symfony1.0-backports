@@ -152,7 +152,7 @@ class sfProcessCache
     switch (self::cacher())
     {
       case 'apc':
-        return apc_clear_cache('user');
+        return apc_clear_cache();
       case 'xcache':
         for ($i = 0, $max = xcache_count(XC_TYPE_VAR); $i < $max; $i++)
         {
