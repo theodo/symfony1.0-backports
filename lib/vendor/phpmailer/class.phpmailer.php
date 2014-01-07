@@ -1278,11 +1278,27 @@ class PHPMailer
             $encoded .= $this->LE;
 
         // Replace every high ascii, control and = characters
-        $encoded = preg_replace('/([\000-\010\013\014\016-\037\075\177-\377])/e',
-                  "'='.sprintf('%02X', ord('\\1'))", $encoded);
+//        $encoded = preg_replace('/([\000-\010\013\014\016-\037\075\177-\377])/e',
+//                  "'='.sprintf('%02X', ord('\\1'))", $encoded);
+
+        $encoded = preg_replace_callback(
+          '/([\000-\010\013\014\016-\037\075\177-\377])/',
+          function($matches){
+            return '='.sprintf('%02X', ord($matches[1]));
+          },
+          $encoded
+        );
         // Replace every spaces and tabs when it's the last character on a line
-        $encoded = preg_replace("/([\011\040])".$this->LE."/e",
-                  "'='.sprintf('%02X', ord('\\1')).'".$this->LE."'", $encoded);
+//        $encoded = preg_replace("/([\011\040])".$this->LE."/e",
+//                  "'='.sprintf('%02X', ord('\\1')).'".$this->LE."'", $encoded);
+
+        $encoded = preg_replace_callback(
+          "/([\011\040])".$this->LE."/",
+          function($matches){
+            return '='.sprintf('%02X', ord($matches[1]));
+          },
+          $encoded
+        );
 
         // Maximum line length of 76 characters before CRLF (74 + space + '=')
         $encoded = $this->WrapText($encoded, 74, true);
@@ -1301,15 +1317,36 @@ class PHPMailer
 
         switch (strtolower($position)) {
           case "phrase":
-            $encoded = preg_replace("/([^A-Za-z0-9!*+\/ -])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+            //$encoded = preg_replace("/([^A-Za-z0-9!*+\/ -])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+            $encoded = preg_replace_callback(
+              "/([^A-Za-z0-9!*+\/ -])/",
+              function($matches){
+                return '='.sprintf('%02X', ord($matches[1]));
+              },
+              $encoded
+            );
             break;
           case "comment":
-            $encoded = preg_replace("/([\(\)\"])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+            //$encoded = preg_replace("/([\(\)\"])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+            $encoded = preg_replace_callback(
+              "/([\(\)\"])/",
+              function($matches){
+                return '='.sprintf('%02X', ord($matches[1]));
+              },
+              $encoded
+            );
           case "text":
           default:
             // Replace every high ascii, control =, ? and _ characters
-            $encoded = preg_replace('/([\000-\011\013\014\016-\037\075\077\137\177-\377])/e',
-                  "'='.sprintf('%02X', ord('\\1'))", $encoded);
+//            $encoded = preg_replace('/([\000-\011\013\014\016-\037\075\077\137\177-\377])/e',
+//                  "'='.sprintf('%02X', ord('\\1'))", $encoded);
+            $encoded = preg_replace_callback(
+              '/([\000-\011\013\014\016-\037\075\077\137\177-\377])/',
+              function($matches){
+                return '='.sprintf('%02X', ord($matches[1]));
+              },
+              $encoded
+            );
             break;
         }
         
